@@ -1,0 +1,264 @@
+﻿
+@{
+    ViewBag.Title = "OrderDetail";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<!-- inner page banner -->
+<div id="inner_banner" class="section inner_banner_section">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="full">
+                    <div class="title-holder">
+                        <div class="title-holder-cell text-left">
+                            <h1 class="page-title">Order Detail</h1>
+                            <ol class="breadcrumb">
+                                <li><a href="@Url.Action("Index","Home", new { area=""})">Home</a></li>
+                                <li class="active">Order Detail</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end inner page banner -->
+<div class="section padding_layout_1 Shopping_cart_section">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="full">
+                    <div class="main_heading text_align_center">
+                        <h2>Progress</h2>
+                        <p class="large">Fastest repair service with best price!</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+                <div class="full text_align_center margin_bottom_30">
+                    <div class="center">
+                        <div class="icon"> <img src="~/Templates/IT-Next/images/it_service/si4.png" alt="#" /> </div>
+                    </div>
+                    <h4 class="theme_color">Waiting Accept Order</h4>
+                    <p>Perspiciatis eos quos totam cum minima aut!</p>
+                </div>
+            </div>
+            @if (ViewBag.status == null)
+            {
+                <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+                    <div class="full text_align_center margin_bottom_30">
+                        <div class="center">
+                            <div class="icon"> <img src="~/Templates/IT-Next/images/it_service/si6.png" alt="#" style="filter: grayscale(100%)" /> </div>
+                        </div>
+                        <h4 class="theme_color">Accept Order</h4>
+                        <p>Perspiciatis eos quos totam cum minima aut!</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+                    <div class="full text_align_center margin_bottom_30">
+                        <div class="center">
+                            <div class="icon"> <img src="~/Templates/IT-Next/images/it_service/si1.png" alt="#" style="filter: grayscale(100%)" /> </div>
+                        </div>
+                        <h4 class="theme_color">Transport</h4>
+                        <p>Perspiciatis eos quos totam cum minima aut!</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+                    <div class="full text_align_center margin_bottom_30 margin_0">
+                        <div class="center">
+                            <div class="icon"> <img src="~/Templates/IT-Next/images/it_service/si5.png" alt="#" style="filter: grayscale(100%)" /> </div>
+                        </div>
+                        <h4 class="theme_color">Finish</h4>
+                        <p>Perspiciatis eos quos totam cum minima aut!</p>
+                    </div>
+                </div>
+            }
+            else if (ViewBag.status == 1)
+            {
+                <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+                    <div class="full text_align_center margin_bottom_30">
+                        <div class="center">
+                            <div class="icon"> <img src="~/Templates/IT-Next/images/it_service/si6.png" alt="#" /> </div>
+                        </div>
+                        <h4 class="theme_color">Accept Order</h4>
+                        <p>Perspiciatis eos quos totam cum minima aut!</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+                    <div class="full text_align_center margin_bottom_30">
+                        <div class="center">
+                            <div class="icon"> <img src="~/Templates/IT-Next/images/it_service/si1.png" alt="#" style="filter: grayscale(100%)" /> </div>
+                        </div>
+                        <h4 class="theme_color">Transport</h4>
+                        <p>Perspiciatis eos quos totam cum minima aut!</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+                    <div class="full text_align_center margin_bottom_30 margin_0">
+                        <div class="center">
+                            <div class="icon"> <img src="~/Templates/IT-Next/images/it_service/si5.png" alt="#" style="filter: grayscale(100%)" /> </div>
+                        </div>
+                        <h4 class="theme_color">Finish</h4>
+                        <p>Perspiciatis eos quos totam cum minima aut!</p>
+                    </div>
+                </div>
+            }
+            else if (ViewBag.status == 3)
+            {
+                <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+                    <div class="full text_align_center margin_bottom_30">
+                        <div class="center">
+                            <div class="icon"> <img src="~/Templates/IT-Next/images/it_service/si6.png" alt="#" /> </div>
+                        </div>
+                        <h4 class="theme_color">Accept Order</h4>
+                        <p>Perspiciatis eos quos totam cum minima aut!</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+                    <div class="full text_align_center margin_bottom_30">
+                        <div class="center">
+                            <div class="icon"> <img src="~/Templates/IT-Next/images/it_service/si1.png" alt="#" /> </div>
+                        </div>
+                        <h4 class="theme_color">Transport</h4>
+                        <p>Perspiciatis eos quos totam cum minima aut!</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+                    <div class="full text_align_center margin_bottom_30 margin_0">
+                        <div class="center">
+                            <div class="icon"> <img src="~/Templates/IT-Next/images/it_service/si5.png" alt="#" style="filter: grayscale(100%)" /> </div>
+                        </div>
+                        <h4 class="theme_color">Finish</h4>
+                        <p>Perspiciatis eos quos totam cum minima aut!</p>
+                    </div>
+                </div>
+            }
+            else if (ViewBag.status == 4)
+            {
+                <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+                    <div class="full text_align_center margin_bottom_30">
+                        <div class="center">
+                            <div class="icon"> <img src="~/Templates/IT-Next/images/it_service/si6.png" alt="#" /> </div>
+                        </div>
+                        <h4 class="theme_color">Accept Order</h4>
+                        <p>Perspiciatis eos quos totam cum minima aut!</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+                    <div class="full text_align_center margin_bottom_30">
+                        <div class="center">
+                            <div class="icon"> <img src="~/Templates/IT-Next/images/it_service/si1.png" alt="#" /> </div>
+                        </div>
+                        <h4 class="theme_color">Transport</h4>
+                        <p>Perspiciatis eos quos totam cum minima aut!</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+                    <div class="full text_align_center margin_bottom_30 margin_0">
+                        <div class="center">
+                            <div class="icon"> <img src="~/Templates/IT-Next/images/it_service/si5.png" alt="#" /> </div>
+                        </div>
+                        <h4 class="theme_color">Finish</h4>
+                        <p>Perspiciatis eos quos totam cum minima aut!</p>
+                    </div>
+                </div>
+            }
+            else
+            {
+                <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+                    <div class="full text_align_center margin_bottom_30">
+                        <div class="center">
+                            <div class="icon"> <img src="~/Templates/IT-Next/images/it_service/si2.png" alt="#" /> </div>
+                        </div>
+                        <h4 class="theme_color">Order Cancel</h4>
+                        <p>Perspiciatis eos quos totam cum minima aut!</p>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12 col-md-12">
+                <div class="product-table">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Product</th>
+                                <th>OrderID</th>
+                                <th>Quantity</th>
+                                <th>Price</th>
+                                <th>Total</th>
+                                <th> </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in ViewBag.orderDetail)
+                            {
+                                <tr>
+                                    <td class="col-sm-8 col-md-6">
+                                        <div class="media">
+                                            <a class="thumbnail pull-left" href="#"> <img class="media-object cart-img" src="~/Images/Products/@item.Product.Image" alt="#"></a>
+                                            <div class="media-body">
+                                                <h4 class="media-heading"><a href="#">@item.Product.ProductName</a></h4>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="col-sm-1 col-md-1 text-center"><p class="price_table">@item.OrderID</p></td>
+                                    <td class="col-sm-1 col-md-1 text-center"><p class="price_table">@item.QuantityBuy</p></td>
+                                    <td class="col-sm-1 col-md-1 text-center"><p class="price_table">@item.Product.Price</p></td>
+                                    <td class="col-sm-1 col-md-1 text-center">
+                                        <p class="price_table">@item.Price </p>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+                <div class="shopping-cart-cart">
+                    <table>
+                        <tbody>
+                            <tr class="head-table">
+                                <td><h5>Cart Totals</h5></td>
+                                <td class="text-right"></td>
+                            </tr>
+                            <tr>
+                                <td><h3>Total</h3></td>
+                                <td class="text-right"><h4>@ViewBag.total</h4></td>
+                            </tr>
+                            <tr>
+                                <td><a href="@Url.Action("Menu","Home")">Continue Shopping...</a></td>
+                                <td>
+                                    @foreach (var item in ViewBag.orderDetail)
+                                    {
+                                        if (item.Order.Status == null)
+                                        {
+                                            <div class="shopping-cart-cart">
+                                                <table>
+                                                    <tbody>
+                                                        <tr>
+                                                            <td>
+                                                                <form action="@Url.Action("Cancel","OrderProgress", new { id=item.OrderID})">
+                                                                    <button class="button" type="submit">Cancel Order</button>
+                                                                </form>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        }
+                                        break;
+                                    }
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

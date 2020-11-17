@@ -1,0 +1,118 @@
+﻿@model TMDT_Web.Models.Domain.Account
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<!-- inner page banner -->
+<div id="inner_banner" class="section inner_banner_section">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="full">
+                    <div class="title-holder">
+                        <div class="title-holder-cell text-left">
+                            <h1 class="page-title">User Page</h1>
+                            <ol class="breadcrumb">
+                                <li><a href="index.html">Home</a></li>
+                                <li class="active">User Page</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end inner page banner -->
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="side_bar_blog col-lg-3">
+            <h4>OUR SERVICE</h4>
+            <div class="categary">
+                <ul>
+                    <li><a href="@Url.Action("HistoryOrder","OrderProgress")"><i class="fa fa-angle-right"></i> Orders</a></li>
+                    <li><a href="@Url.Action("Index","Cart")"><i class="fa fa-angle-right"></i> Cart</a></li>
+                    <li>
+                        <form action="@Url.Action("Logout","Authentication")" id="logout">
+                            <a href="#" onclick="LogOut()"><i class="fa fa-angle-right"></i> Logout</a>
+                        </form>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="col-lg-9 float-left">
+            <table class="table" style="margin-top:50px">
+                <tr>
+                    <th>Avatar:</th>
+                    <td colspan="2">
+                        <form action="@Url.Action("ChangeAvatar","Authentication")" method="post" enctype="multipart/form-data">
+                            <img src="~/Images/Avatar/@Model.Avatar" style="height:400px; width:400px" />
+                            <br />
+                            <input type="file" name="Image" />
+                            <br />
+                            <button type="submit">Save</button>
+                        </form>
+                    </td>
+                </tr>
+                <tr>
+                    <th>Full Name:</th>
+                    <td>@Model.FirstName @Model.LastName</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <th>Address:</th>
+                    <td>@Model.Address</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <th>Age:</th>
+                    <td>@Model.Age</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <th>Email:</th>
+                    <td>@Model.Email</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <th>Password:</th>
+                    <td>
+                        <form action="@Url.Action("ChangePassword","Authentication", new { id=Model.UserID})">
+                            <ul id="PW">
+                                <li>Current Password</li>
+                                <li><input type="password" value="@Model.Password" name="cpw" /></li>
+                                <li>New Password</li>
+                                <li><input type="password" name="npw" /></li>
+                                <li>Confirm New Password</li>
+                                <li><input type="password" name="cnpw" /></li>
+                                <li><button type="submit">Change Password</button></li>
+                            </ul>
+                        </form>
+                    </td>
+                    <td><button onclick="ShowHide()">Edit</button></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
+<!-- Script -->
+<script>
+    function ShowHide() {
+        var x = document.getElementById("PW");
+        if (x.style.display == "none") {
+            x.style.display = "block";
+        }
+        else {
+            x.style.display = "none";
+        }
+    }
+</script>
+<!-- End script -->
+<!-- Script -->
+<script>
+    function LogOut() {
+        document.getElementById("logout").submit();
+    }
+</script>
+<!-- End script -->

@@ -1,0 +1,88 @@
+﻿
+@{
+    ViewBag.Title = "OrderDetail";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<!-- inner page banner -->
+<div id="inner_banner" class="section inner_banner_section">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="full">
+                    <div class="title-holder">
+                        <div class="title-holder-cell text-left">
+                            <h1 class="page-title">Order Detail</h1>
+                            <ol class="breadcrumb">
+                                <li><a href="@Url.Action("Index","Home", new { area=""})">Home</a></li>
+                                <li class="active">Order Detail</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end inner page banner -->
+<div class="section padding_layout_1 Shopping_cart_section">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12 col-md-12">
+                <div class="product-table">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Product</th>
+                                <th>OrderID</th>
+                                <th>Quantity</th>
+                                <th>Price</th>
+                                <th> </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in ViewBag.orderDetail)
+                            {
+                                <tr>
+                                    <td class="col-sm-8 col-md-6">
+                                        <div class="media">
+                                            <a class="thumbnail pull-left" href="#"> <img class="media-object cart-img" src="~/Images/Products/@item.Product.Image" alt="#"></a>
+                                            <div class="media-body">
+                                                <h4 class="media-heading"><a href="#">@item.Product.ProductName</a></h4>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="col-sm-1 col-md-1 text-center"><p class="price_table">@item.OrderID</p></td>
+                                    <td class="col-sm-1 col-md-1 text-center"><p class="price_table">@item.QuantityBuy</p></td>
+                                    <td class="col-sm-1 col-md-1 text-center">
+                                        <p class="price_table">@(item.Price * item.QuantityBuy)</p>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                    @foreach (var item in ViewBag.orderDetail)
+                    {
+                        if (item.Order.Status == null)
+                        {
+                            <div class="shopping-cart-cart">
+                                <table>
+                                    <tbody>
+                                        <tr>
+                                            <td>
+                                                <form action="@Url.Action("Cancel","OrderProgress", new { id=item.OrderID})">
+                                                    <button class="button" type="submit">Cancel Order</button>
+                                                </form>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        }
+                        break;
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

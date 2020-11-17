@@ -1,0 +1,63 @@
+﻿@model TMDT_Web.Models.Domain.Company
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<!-- inner page banner -->
+<div id="inner_banner" class="section inner_banner_section">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="full">
+                    <div class="title-holder">
+                        <div class="title-holder-cell text-left">
+                            <h1 class="page-title">Create Company</h1>
+                            <ol class="breadcrumb">
+                                <li><a href="@Url.Action("Index","Home",new { area=""})">Home</a></li>
+                                <li class="active">Create Company</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end inner page banner -->
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="side_bar_blog col-lg-3">
+            <h4>OUR SERVICE</h4>
+            <div class="categary">
+                <ul>
+                    <li><a href="@Url.Action("Index","AdminHome",new { area= "Admin"})"><i class="fa fa-angle-right"></i> Home</a></li>
+                    <li><a href="@Url.Action("Index","Company",new { area= "Admin"})"><i class="fa fa-angle-right"></i> Companies</a></li>
+                    <li><a href="@Url.Action("Index","Brand",new { area= "Admin"})"><i class="fa fa-angle-right"></i> Brands</a></li>
+                    <li><a href="@Url.Action("Index","Product",new { area= "Admin"})"><i class="fa fa-angle-right"></i> Products</a></li>
+                    <li><a href="@Url.Action("Index","User",new { area= "Admin"})"><i class="fa fa-angle-right"></i> Users</a></li>
+                    <li><a href="@Url.Action("Index","Order",new { area= "Admin"})"><i class="fa fa-angle-right"></i> Orders</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="col-lg-9 float-left" style="margin-top:30px">
+            <form action="@Url.Action("Create","Company")" method="post">
+                <div class="row">
+                    <div class="col-lg-4">
+                        @Html.AntiForgeryToken()
+                        <label>Tên Công Ty</label>
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="col-lg-8">
+                        @Html.EditorFor(x => x.CompanyName, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model=>model.CompanyName, "", new { @class= "text-danger"})
+                    </div>
+                    <div class="col-lg-12">
+                        <input type="submit" value="Create" />
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+

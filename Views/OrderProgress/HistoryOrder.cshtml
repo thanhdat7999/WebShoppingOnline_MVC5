@@ -1,0 +1,124 @@
+﻿@model IEnumerable<TMDT_Web.Models.Domain.Order>
+@{
+    ViewBag.Title = "HistoryOrder";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<!-- inner page banner -->
+<div id="inner_banner" class="section inner_banner_section">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="full">
+                    <div class="title-holder">
+                        <div class="title-holder-cell text-left">
+                            <h1 class="page-title">History Orders</h1>
+                            <ol class="breadcrumb">
+                                <li><a href="@Url.Action("Index","Home", new { area=""})">Home</a></li>
+                                <li class="active">Orders</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end inner page banner -->
+<!-- Danh sách sản phẩm & side bar -->
+<div class="section" style="margin-top:20px">
+    <div class="container">
+        <div class="row">
+            @if (User.Identity.IsAuthenticated)
+            {
+                <div class="col-sm-12">
+                    <table class="table">
+                        <tr>
+                            <th>Order ID</th>
+                            <th>Order Date Time</th>
+                            <th>User Name</th>
+                            <th>Status</th>
+                            <th></th>
+                        </tr>
+                        @foreach (var item in ViewBag.order)
+                        {
+                            <tr>
+                                <td>@item.OrderID</td>
+                                <td>@item.DateTimeOrder</td>
+                                <td>@item.Account.UserName</td>
+                                @if (item.Status == null)
+                                {
+                                    <td>Waiting for accept</td>
+                                    <td>
+                                        <form action="@Url.Action("Cancel","OrderProgress", new { id=item.OrderID})">
+                                            <button class="button" type="submit">Cancel Order</button>
+                                        </form>
+                                    </td>
+                                }
+                                else if (item.Status == 1)
+                                {
+                                    <td>Accepted</td>
+                                    <td></td>
+                                }
+                                else
+                                {
+                                    <td>Cancel</td>
+                                    <td></td>
+                                }
+                                <td><a href="@Url.Action("OrderDetail","OrderProgress",new { id=item.OrderID})">View Detail...</a></td>
+                            </tr>
+                        }
+                    </table>
+                </div>
+            }
+            else
+            {
+                <div class="col-sm-12">
+                    <form action="@Url.Action("SearchPhone","OrderProgress")" method="post">
+                        <input type="text" name="num" />
+                        <input type="submit" />
+                    </form>
+                </div>
+                <div class="col-sm-12">
+                    <table class="table">
+                        <tr>
+                            <th>Order ID</th>
+                            <th>Order Date Time</th>
+                            <th>User Name</th>
+                            <th>Status</th>
+                            <th></th>
+                        </tr>
+                        @foreach (var item in ViewBag.order)
+                        {
+                            <tr>
+                                <td>@item.OrderID</td>
+                                <td>@item.DateTimeOrder</td>
+                                <td>@item.OrderPhoneNumber</td>
+                                @if (item.Status == null)
+                                {
+                                    <td>Waiting for accept</td>
+                                    <td>
+                                        <form action="@Url.Action("Cancel","OrderProgress", new { id=item.OrderID})">
+                                            <button class="button" type="submit">Cancel Order</button>
+                                        </form>
+                                    </td>
+                                }
+                                else if (item.Status == 1)
+                                {
+                                    <td>Accepted</td>
+                                    <td></td>
+                                }
+                                else
+                                {
+                                    <td>Cancel</td>
+                                    <td></td>
+                                }
+                                <td><a href="@Url.Action("OrderDetail","OrderProgress",new { id=item.OrderID})">View Detail...</a></td>
+                            </tr>
+                        }
+                    </table>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+<!-- Kết ds sản phẩm -->

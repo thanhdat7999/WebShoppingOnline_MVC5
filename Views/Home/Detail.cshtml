@@ -1,0 +1,205 @@
+﻿@model TMDT_Web.Models.Domain.Product
+@using PagedList.Mvc;
+@{
+    ViewBag.Title = "Detail";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<!-- inner page banner -->
+<div id="inner_banner" class="section inner_banner_section">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="full">
+                    <div class="title-holder">
+                        <div class="title-holder-cell text-left">
+                            <h1 class="page-title">Shop Detail</h1>
+                            <ol class="breadcrumb">
+                                <li><a href="@Url.Action("Index","Home", new { area=""})">Home</a></li>
+                                <li class="active">Detail</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end inner page banner -->
+<!-- section -->
+<div class="section padding_layout_1 product_detail">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-9">
+                <div class="row">
+                    <div class="col-xl-6 col-lg-12 col-md-12">
+                        <div class="product_detail_feature_img hizoom hi2">
+                            <div class='hizoom hi2'> <img class="detail-img" src="~/Images/Products/@Model.Image" alt="#" /> </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-6 col-lg-12 col-md-12 product_detail_side detail_style1">
+                        <div class="product-heading">
+                            <h2>@Model.ProductName</h2>
+                        </div>
+                        <div class="product-detail-side"> <span><del>$25.00</del></span><span class="new-price">@Model.Price VND</span></div>
+                        <div class="detail-contant">
+                            <p>
+                                @Model.Description<br>
+                                <span class="stock">Còn lại @Model.Quantity sản phẩm</span>
+                            </p>
+                            <form class="cart" method="post" action="@Url.Action("Buy","Cart", new { id=Model.ProductID})">
+                                <button type="submit" class="btn sqaure_bt">Add to cart</button>
+                            </form>
+                        </div>
+                        <div class="share-post">
+                            <a href="#" class="share-text">Share</a>
+                            <ul class="social_icons">
+                                <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+                                <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+                                <li><a href="#"><i class="fa fa-google-plus" aria-hidden="true"></i></a></li>
+                                <li><a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
+                                <li><a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="full">
+                            <div class="tab_bar_section">
+                                <ul class="nav nav-tabs" role="tablist">
+                                    <li class="nav-item"> <a class="nav-link active" data-toggle="tab" href="#description">Description</a> </li>
+                                    <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#reviews">Reviews (@ViewBag.countReview)</a> </li>
+                                </ul>
+                                <!-- Tab panes -->
+                                <div class="tab-content">
+                                    <div id="description" class="tab-pane active">
+                                        <div class="product_desc">
+                                            <p>
+                                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas ac elementum elit. Morbi eu arcu ipsum. Aliquam lobortis accumsan quam ac convallis.
+                                                Fusce elit mauris, aliquet at odio vel, convallis vehicula nisi. Morbi vitae porttitor dolor. Integer eget metus sem. Nam venenatis mauris vel leo pulvinar,
+                                                id rutrum dui varius. Nunc ac varius quam, non convallis magna. Donec suscipit commodo dapibus.<br>
+                                                <br>
+                                                Vestibulum et ullamcorper ligula. Morbi bibendum tempor rutrum.
+                                                Pelle tesque auctor purus id molestie ornare.Donec eu lobortis risus. Pellentesque sed aliquam lorem. Praesent pulvinar lorem vel mauris ultrices posuere.
+                                                Phasellus elit ex, gravida a semper ut, venenatis vitae diam. Nullam eget leo massa. Aenean eu consequat arcu, vitae scelerisque quam. Suspendisse risus turpis,
+                                                pharetra a finibus vitae, lobortis et mi.
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div id="reviews" class="tab-pane fade">
+                                        <div class="product_review">
+                                            <h3>Reviews (@ViewBag.countReview)</h3>
+                                            @foreach (var item in ViewBag.review)
+                                            {
+                                                <div class="commant-text row">
+                                                    <div class="col-lg-2 col-md-2 col-sm-4">
+                                                        <div class="profile"> <img class="img-responsive" src="~/Images/Avatar/@item.Account.Avatar" alt="#"> </div>
+                                                    </div>
+                                                    <div class="col-lg-10 col-md-10 col-sm-8">
+                                                        <h5>@item.Account.UserName</h5>
+                                                        <p><span class="c_date">@item.DateTime</span> | <span><a rel="nofollow" class="comment-reply-link" href="#">Reply</a></span></p>
+                                                        <span class="rating"> <i class="fa fa-star" aria-hidden="true"></i> <i class="fa fa-star" aria-hidden="true"></i> <i class="fa fa-star" aria-hidden="true"></i> <i class="fa fa-star" aria-hidden="true"></i> <i class="fa fa-star-o" aria-hidden="true"></i> </span>
+                                                        <p class="msg">@item.Comment</p>
+                                                    </div>
+                                                </div>
+                                            }
+                                            <div class="row">
+                                                <div class="col-sm-12">
+                                                    <div class="full review_bt_section">
+                                                        <div class="float-right"> <a class="btn sqaure_bt" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">Leave a Review</a> </div>
+                                                    </div>
+                                                    <div class="full">
+                                                        <div id="collapseExample" class="full collapse commant_box">
+                                                            <form accept-charset="UTF-8" action="@Url.Action("Review","Home", new { proid=Model.ProductID})" method="post">
+                                                                <input id="ratings-hidden" name="rating" type="hidden">
+                                                                <textarea class="form-control animated" cols="50" id="new-review" name="Comment" placeholder="Enter your review here..." required=""></textarea>
+                                                                <div class="full_bt center">
+                                                                    <button class="btn sqaure_bt" type="submit">Comment</button>
+                                                                </div>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!--Sản phẩm liên quan-->
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="full">
+                            <div class="main_heading text_align_left" style="margin-bottom: 35px;">
+                                <h3>Related products</h3>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    @foreach (var item in ViewData["products"] as IEnumerable<TMDT_Web.Models.Domain.Product>)
+                    {
+                        <div class="col-md-4 col-sm-6 col-xs-12 margin_bottom_30_all">
+                            <div class="product_list">
+                                <div class="product_img"><a href="@Url.Action("Detail","Home",new { id=item.ProductID})"><img class="img-responsive card-img" src="~/Images/Products/@item.Image" alt=""> </a></div>
+                                <div class="product_detail_btm">
+                                    <div class="center">
+                                        <h4><a href="it_shop_detail.html">@item.ProductName</a></h4>
+                                    </div>
+                                    <div class="product_price">
+                                        <p><span class="old_price">$15.00</span> – <span class="new_price">@item.Price VND</span></p>
+                                    </div>
+                                    <div class="button_Section_cont center"> <a class="btn dark_gray_bt" href="#">Contact us</a> </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                    <br />
+                    <div class="center col-md-12 col-sm-6 col-xs-12 margin_bottom_30_all">
+                        @foreach (var item in ViewData["products"] as PagedList.IPagedList<TMDT_Web.Models.Domain.Product>)
+                        {
+                            @Html.PagedListPager(ViewData["products"] as PagedList.IPagedList<TMDT_Web.Models.Domain.Product>, page => Url.Action("Detail", "Home", new { id = Model.ProductID, page }))
+                            break;
+                        }
+                    </div>
+                </div>
+                <!--Kết Sản phẩm liên quan-->
+            </div>
+            <!-- Side bar -->
+            <div class="col-md-3">
+                <div class="side_bar">
+                    <div class="side_bar_blog">
+                        <h4>Laptop Companies</h4>
+                        <div class="categary">
+                            <ul>
+                                @foreach (var item in ViewBag.SideBar)
+                                {
+                                    <li><a href="@Url.Action("CompanySidebar","Home", new { companysidebar=item.CompanyID})"><i class="fa fa-angle-right"></i>@item.CompanyName</a></li>
+                                }
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="side_bar">
+                    <div class="side_bar_blog">
+                        <h4>Laptop Brands</h4>
+                        <div class="categary">
+                            <ul>
+                                @foreach (var item in ViewBag.SideBarBrand)
+                                {
+                                    <li><a href="@Url.Action("BrandSidebar","Home", new { brandsidebar=item.BrandID})"><i class="fa fa-angle-right"></i>@item.BrandName</a></li>
+                                }
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Kết side bar -->
+        </div>
+    </div>
+</div>
+<!-- end section -->

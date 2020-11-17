@@ -1,0 +1,65 @@
+﻿@model TMDT_Web.Models.Domain.Brand
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<!-- inner page banner -->
+<div id="inner_banner" class="section inner_banner_section">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="full">
+                    <div class="title-holder">
+                        <div class="title-holder-cell text-left">
+                            <h1 class="page-title">Create Brands</h1>
+                            <ol class="breadcrumb">
+                                <li><a href="@Url.Action("Index","Home",new { area=""})">Home</a></li>
+                                <li class="active">Create brabds</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end inner page banner -->
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="side_bar_blog col-lg-3">
+            <h4>OUR SERVICE</h4>
+            <div class="categary">
+                <ul>
+                    <li><a href="@Url.Action("Index","AdminHome",new { area= "Admin"})"><i class="fa fa-angle-right"></i> Home</a></li>
+                    <li><a href="@Url.Action("Index","Company",new { area= "Admin"})"><i class="fa fa-angle-right"></i> Companies</a></li>
+                    <li><a href="@Url.Action("Index","Brand",new { area= "Admin"})"><i class="fa fa-angle-right"></i> Brands</a></li>
+                    <li><a href="@Url.Action("Index","Product",new { area= "Admin"})"><i class="fa fa-angle-right"></i> Products</a></li>
+                    <li><a href="@Url.Action("Index","User",new { area= "Admin"})"><i class="fa fa-angle-right"></i> Users</a></li>
+                    <li><a href="@Url.Action("Index","Order",new { area= "Admin"})"><i class="fa fa-angle-right"></i> Orders</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="col-lg-9 float-left" style="margin-top:30px">
+            <form action="@Url.Action("Create","Brand")" method="post">
+                <div class="row">
+                    <div class="col-lg-4">
+                        <label>Tên hãng</label>
+                    </div>
+                    <div class="col-lg-8">
+                        @Html.EditorFor(x => x.BrandName, new { htmlAttributes = new { @class = "form-control" } })
+                    </div>
+                    <div class="col-lg-4">
+                        <label>Tên Công Ty</label>
+                    </div>
+                    <div class="col-lg-8">
+                        @Html.DropDownList("CompanyID", null, htmlAttributes: new { @class = "form-control", size = "1", @style = "width: 120px" })
+                    </div>
+                    <div class="col-lg-12">
+                        <input type="submit" value="Create" />
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
