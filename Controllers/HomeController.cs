@@ -170,7 +170,7 @@ namespace TMDT_Web.Controllers
         }
 
         //Trang chi tiết sản phẩm
-        public ActionResult Detail(int? id, int? page)
+        public ActionResult Detail(int? id, int? page, int? star)
         {
             //Đếm sản phẩm trong giỏ hàng
             List<Item> cart = (List<Item>)Session["cart"];
@@ -183,6 +183,9 @@ namespace TMDT_Web.Controllers
                 ViewData["countCartProducts"] = cart.Count;
             }
             Product product = db.product.FirstOrDefault(x => x.ProductID == id);
+
+            //Đánh giá sao cho sản phẩm 
+
 
             //Side bar cty laptop
             ViewBag.SideBar = db.company.ToList();

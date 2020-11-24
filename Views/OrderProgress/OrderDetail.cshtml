@@ -230,7 +230,17 @@
                                 <td class="text-right"><h4>@ViewBag.total</h4></td>
                             </tr>
                             <tr>
-                                <td><a href="@Url.Action("Menu","Home")">Continue Shopping...</a></td>
+                                @if (User.Identity.IsAuthenticated)
+                                {
+                                    <td><a href="@Url.Action("HistoryOrder","OrderProgress")">Continue Shopping...</a></td>
+                                }
+                                else
+                                {
+                                    foreach (var item in ViewBag.orderDetail)
+                                    {
+                                        <td><a href="@Url.Action("HistoryOrder","OrderProgress", new { num= item.Order.OrderPhoneNumber})">Continue Shopping...</a></td>
+                                    }
+                                }
                                 <td>
                                     @foreach (var item in ViewBag.orderDetail)
                                     {
@@ -241,8 +251,11 @@
                                                     <tbody>
                                                         <tr>
                                                             <td>
-                                                                <form action="@Url.Action("Cancel","OrderProgress", new { id=item.OrderID})">
-                                                                    <button class="button" type="submit">Cancel Order</button>
+                                                                <h4 id="demo"></h4>
+                                                                <input type="hidden" id="DateTimeNow" value=" @item.Order.DateTimeOrder" />
+                                                                <input type="hidden" id="DateTimeCount" value="@ViewBag.time" />
+                                                                <form id="cancelOrder" action="@Url.Action("Cancel","OrderProgress", new { id=item.OrderID})">
+                                                                    <button class="button" onclick="">Cancel Order</button>
                                                                 </form>
                                                             </td>
                                                         </tr>
@@ -262,3 +275,25 @@
     </div>
 </div>
 
+<script>
+    var countDownDate = new Date(document.getElementById("DateTimeCount").value).getTime();
+    var x = setInterval(function () {
+        var now = new Date().getTime();
+        var distance = countDownDate - now;
+        var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        var seconds = Math.floor((distance % (1000 * 60)) / (1000));
+
+        document.getElementById("demo").innerHTML = days + "d " + hours + "h " + minutes + "m " + seconds + "s - left to CANCEL ORDER! " ;
+
+        if (distance <= 0) {
+            clearInterval(x);
+            document.getElementById("demo").innerHTML = "Time cancel order is out";
+            document.getElementById("cancelOrder").style.display ="none";
+        }
+        else {
+            document.getElementById("cancelOrder").style.display = "block";
+        }
+    }, 1000);
+</script>

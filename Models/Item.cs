@@ -10,5 +10,10 @@ namespace TMDT_Web.Models
     {
         public Product product { get; set; }
         public int QuantityBuy { get; set; }
+        public Item(Product product, int quantitybuy)
+        {
+            this.product = product;
+            QuantityBuy= quantitybuy;
+        }
     }
 }

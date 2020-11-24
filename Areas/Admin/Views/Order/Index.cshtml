@@ -69,13 +69,59 @@
                             <td>@item.OrderID</td>
                             <td>@item.DateTimeOrder</td>
                             <td></td>
-                            <td>@item.Status</td>
+                            @if (item.Status == null)
+                            {
+                                <td>Waiting For Accept</td>
+                            }
+                            else if (item.Status == 1)
+                            {
+                                <td>Order Accepted</td>
+                            }
+                            else if (item.Status == 2)
+                            {
+                                <td>Order Canceled</td>
+                            }
+                            else if (item.Status == 3)
+                            {
+                                <td>Transport</td>
+                            }
+                            else if (item.Status == 4)
+                            {
+                                <td>Finish</td>
+                            }
                             <td>
-                                @Html.ActionLink("Accept Order", "Accept", new { id = item.OrderID }) |
-                                @Html.ActionLink("Transport", "Transport", new { id = item.OrderID }) |
-                                @Html.ActionLink("Finish", "Finish", new { id = item.OrderID }) |
-                                @Html.ActionLink("Cancel Order", "Cancel", new { id = item.OrderID }) |
-                                @Html.ActionLink("Detail Order", "Detail", new { id = item.OrderID })
+                                <div class="row">
+                                    <div class="col-sm-2">
+                                        <form action="@Url.Action("Accept","Order", new { id=item.OrderPhoneNumber})">
+                                            <input type="image" src="~/Templates/IT-Next/images/it_service/accept.png" alt="Submit" class="Button-Img" />
+                                            <label>Accept Order</label>
+                                        </form>
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <form action="@Url.Action("Transport","Order", new { id=item.OrderPhoneNumber})">
+                                            <input type="image" src="~/Templates/IT-Next/images/it_service/truck.png" alt="Submit" class="Button-Img" />
+                                            <label>Transport</label>
+                                        </form>
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <form action="@Url.Action("Finish","Order", new { id=item.OrderPhoneNumber})">
+                                            <input type="image" src="~/Templates/IT-Next/images/it_service/money.png" alt="Submit" class="Button-Img" />
+                                            <label>Finish</label>
+                                        </form>
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <form action="@Url.Action("Cancel","Order", new { id=item.OrderPhoneNumber})">
+                                            <input type="image" src="~/Templates/IT-Next/images/it_service/cancel.png" alt="Submit" class="Button-Img" />
+                                            <label>Cancel Order</label>
+                                        </form>
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <form action="@Url.Action("Detail","Order", new { id=item.OrderPhoneNumber})">
+                                            <input type="image" src="~/Templates/IT-Next/images/it_service/Detail.png" alt="Submit" class="Button-Img" />
+                                            <label>Detail Order</label>
+                                        </form>
+                                    </div>
+                                </div>
                             </td>
                         </tr>
                     }
@@ -85,7 +131,26 @@
                             <td>@item.OrderID</td>
                             <td>@item.DateTimeOrder</td>
                             <td>@item.Account.UserName</td>
-                            <td>@ViewBag.statusName</td>
+                            @if (item.Status == null)
+                            {
+                                <td>Waiting For Accept</td>
+                            }
+                            else if (item.Status == 1)
+                            {
+                                <td>Order Accepted</td>
+                            }
+                            else if (item.Status == 2)
+                            {
+                                <td>Order Canceled</td>
+                            }
+                            else if (item.Status == 3)
+                            {
+                                <td>Transport</td>
+                            }
+                            else if (item.Status == 4)
+                            {
+                                <td>Finish</td>
+                            }
                             <td>
                                 <div class="row">
                                     <div class="col-sm-2">
@@ -120,11 +185,9 @@
                                     </div>
                                 </div>
                             </td>
-                            
                         </tr>
                     }
                 }
-
             </table>
         </div>
     </div>

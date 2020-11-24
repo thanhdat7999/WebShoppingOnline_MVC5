@@ -14,6 +14,9 @@ namespace TMDT_Web.Models.Domain
         public DateTime DateTimeOrder { get; set; }
         public int? Status { get; set; }
         public int? OrderPhoneNumber { get; set; }
+        public string Address { get; set; }
+        public string Email { get; set; }
+        public int TypePayment { get; set; }
 
         //-----------------------------------------
         //-----------------------------------------

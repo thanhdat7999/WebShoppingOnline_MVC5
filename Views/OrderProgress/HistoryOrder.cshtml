@@ -37,35 +37,46 @@
                             <th>Order Date Time</th>
                             <th>User Name</th>
                             <th>Status</th>
+                            <th>Payment Method</th>
                             <th></th>
                         </tr>
                         @foreach (var item in ViewBag.order)
                         {
-                            <tr>
-                                <td>@item.OrderID</td>
-                                <td>@item.DateTimeOrder</td>
-                                <td>@item.Account.UserName</td>
-                                @if (item.Status == null)
-                                {
-                                    <td>Waiting for accept</td>
-                                    <td>
-                                        <form action="@Url.Action("Cancel","OrderProgress", new { id=item.OrderID})">
-                                            <button class="button" type="submit">Cancel Order</button>
-                                        </form>
-                                    </td>
-                                }
-                                else if (item.Status == 1)
-                                {
-                                    <td>Accepted</td>
-                                    <td></td>
-                                }
-                                else
-                                {
-                                    <td>Cancel</td>
-                                    <td></td>
-                                }
-                                <td><a href="@Url.Action("OrderDetail","OrderProgress",new { id=item.OrderID})">View Detail...</a></td>
-                            </tr>
+                    <tr>
+                        <td>@item.OrderID</td>
+                        <td>
+                            @item.DateTimeOrder
+                        </td>
+                        <td>@item.Account.UserName</td>
+                        @if (item.Status == null)
+                        {
+                            <td>Waiting for accept</td>
+                        }
+                        else if (item.Status == 1)
+                        {
+                            <td>Accepted</td>
+                         
+                        }
+                        else
+                        {
+                            <td>Cancel</td>
+                      
+                        }
+
+                        @if (item.TypePayment == 1)
+                        {
+                            <td>Cash payment</td>
+                        }
+                        else if (item.TypePayment == 2)
+                        {
+                            <td>Momo payment</td>
+                        }
+                        else
+                        {
+                            <td>Paypal payment</td>
+                        }
+                        <td><a href="@Url.Action("OrderDetail","OrderProgress",new { id=item.OrderID})">View Detail...</a></td>
+                    </tr>
                         }
                     </table>
                 </div>
@@ -73,7 +84,7 @@
             else
             {
                 <div class="col-sm-12">
-                    <form action="@Url.Action("SearchPhone","OrderProgress")" method="post">
+                    <form action="@Url.Action("HistoryOrder","OrderProgress")">
                         <input type="text" name="num" />
                         <input type="submit" />
                     </form>
@@ -83,7 +94,7 @@
                         <tr>
                             <th>Order ID</th>
                             <th>Order Date Time</th>
-                            <th>User Name</th>
+                            <th>Phone Number</th>
                             <th>Status</th>
                             <th></th>
                         </tr>
@@ -96,11 +107,6 @@
                                 @if (item.Status == null)
                                 {
                                     <td>Waiting for accept</td>
-                                    <td>
-                                        <form action="@Url.Action("Cancel","OrderProgress", new { id=item.OrderID})">
-                                            <button class="button" type="submit">Cancel Order</button>
-                                        </form>
-                                    </td>
                                 }
                                 else if (item.Status == 1)
                                 {

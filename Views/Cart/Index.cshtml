@@ -1,4 +1,5 @@
-﻿@using TMDT_Web.Models;
+﻿@model TMDT_Web.Models.Domain.Account
+@using TMDT_Web.Models;
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -27,199 +28,191 @@
 <div class="section padding_layout_1 Shopping_cart_section">
     <div class="container">
         <div class="row">
-            @if (User.Identity.IsAuthenticated)
-            {
-                <div class="col-sm-12 col-md-12">
-                    <div class="product-table">
-                        <table class="table">
-                            <thead>
+            <div class="col-sm-12 col-md-12">
+                <div class="product-table">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Product</th>
+                                <th>Quantity</th>
+                                <th class="text-center">Price</th>
+                                <th class="text-center">Total</th>
+                                <th> </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (Item item in (List<Item>)Session["cart"])
+                            {
                                 <tr>
-                                    <th>Product</th>
-                                    <th>Quantity</th>
-                                    <th class="text-center">Price</th>
-                                    <th class="text-center">Total</th>
-                                    <th> </th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach (Item item in (List<Item>)Session["cart"])
-                                {
-                                    <tr>
-                                        <td class="col-sm-8 col-md-6">
-                                            <div class="media">
-                                                <a class="thumbnail pull-left" href="#"> <img class="media-object cart-img" src="~/Images/Products/@item.product.Image" alt="#"></a>
-                                                <div class="media-body">
-                                                    <h4 class="media-heading"><a href="#">@item.product.ProductName</a></h4>
-                                                    <span>Status: </span><span class="text-success">In Stock</span>
-                                                </div>
+                                    <td class="col-sm-8 col-md-6">
+                                        <div class="media">
+                                            <a class="thumbnail pull-left" href="#"> <img class="media-object cart-img" src="~/Images/Products/@item.product.Image" alt="#"></a>
+                                            <div class="media-body">
+                                                <h4 class="media-heading"><a href="#">@item.product.ProductName</a></h4>
+                                                <span>Status: </span><span class="text-success">In Stock</span>
                                             </div>
-                                        </td>
-                                        <td class="col-sm-1 col-md-1" style="text-align: center">
-                                            <form action="@Url.Action("UpdateQuantity","Cart",new { id=item.product.ProductID})">
-                                                <input class="form-control" value="@item.QuantityBuy" type="number" name="quantity">
-                                                <input type="submit" value="Update" />
-                                            </form>
-                                        </td>
-                                        <td class="col-sm-1 col-md-1 text-center"><p class="price_table">@item.product.Price</p></td>
-                                        <td class="col-sm-1 col-md-1 text-center"><p class="price_table">@(item.product.Price * item.QuantityBuy)</p></td>
-                                        <td class="col-sm-1 col-md-1">
-                                            <form action="@Url.Action("Remove","Cart", new { id=item.product.ProductID})">
-                                                <button type="submit" class="bt_main">
-                                                    <i class="fa fa-trash"></i> Remove
-                                                </button>
-                                            </form>
-                                        </td>
-                                    </tr>
-                                }
-                            </tbody>
-                        </table>
-                        <table class="table">
-                            <tbody>
-                                <tr class="cart-form">
-                                    <td class="actions">
-                                        <div class="coupon">
-                                            <input name="coupon_code" class="input-text" id="coupon_code" placeholder="Coupon code" type="text">
-                                            <input class="button" name="apply_coupon" value="Apply coupon" type="submit">
                                         </div>
-                                        <input class="button" name="update_cart" value="Update cart" disabled="" type="submit">
                                     </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <div class="shopping-cart-cart">
-                        <table>
-                            <tbody>
-                                <tr class="head-table">
-                                    <td><h5>Cart Totals</h5></td>
-                                    <td class="text-right"></td>
-                                </tr>
-                                <tr>
-                                    <td><h4>Subtotal</h4></td>
-                                    <td class="text-right"><h4>$50.00</h4></td>
-                                </tr>
-                                <tr>
-                                    <td><h5>Estimated shipping</h5></td>
-                                    <td class="text-right"><h4>$5.00</h4></td>
-                                </tr>
-                                <tr>
-                                    <td><h3>Total</h3></td>
-                                    <td class="text-right"><h4>@ViewBag.total</h4></td>
-                                </tr>
-                                <tr>
-                                    <td><a href="@Url.Action("Menu","Home")">Continue Shopping...</a></td>
-                                    <td>
-                                        <form action="@Url.Action("CheckOut","Cart")">
-                                            <button class="button" type="submit">Checkout</button>
+                                    <td class="col-sm-1 col-md-1" style="text-align: center">
+                                        <form action="@Url.Action("UpdateQuantity","Cart",new { id=item.product.ProductID})">
+                                            <input class="form-control" value="@item.QuantityBuy" type="number" name="quantity">
+                                            <input type="submit" value="Update" />
+                                        </form>
+                                    </td>
+                                    <td class="col-sm-1 col-md-1 text-center"><p class="price_table">@item.product.Price</p></td>
+                                    <td class="col-sm-1 col-md-1 text-center"><p class="price_table">@(item.product.Price * item.QuantityBuy)</p></td>
+                                    <td class="col-sm-1 col-md-1">
+                                        <form action="@Url.Action("Remove","Cart", new { id=item.product.ProductID})">
+                                            <button type="submit" class="bt_main">
+                                                <i class="fa fa-trash"></i> Remove
+                                            </button>
                                         </form>
                                     </td>
                                 </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            }
-            else
-            {
-                <div class="col-sm-12 col-md-12">
-                    <div class="product-table">
-                        <table class="table">
-                            <thead>
-                                <tr>
-                                    <th>Product</th>
-                                    <th>Quantity</th>
-                                    <th class="text-center">Price</th>
-                                    <th class="text-center">Total</th>
-                                    <th> </th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach (Item item in (List<Item>)Session["cart"])
-                                {
-                                    <tr>
-                                        <td class="col-sm-8 col-md-6">
-                                            <div class="media">
-                                                <a class="thumbnail pull-left" href="#"> <img class="media-object cart-img" src="~/Images/Products/@item.product.Image" alt="#"></a>
-                                                <div class="media-body">
-                                                    <h4 class="media-heading"><a href="#">@item.product.ProductName</a></h4>
-                                                    <span>Status: </span><span class="text-success">In Stock</span>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td class="col-sm-1 col-md-1" style="text-align: center">
-                                            <form action="@Url.Action("UpdateQuantity","Cart",new { id=item.product.ProductID})">
-                                                <input class="form-control" value="@item.QuantityBuy" type="number" name="quantity">
-                                                <input type="submit" value="Update" />
-                                            </form>
-                                        </td>
-                                        <td class="col-sm-1 col-md-1 text-center"><p class="price_table">@item.product.Price</p></td>
-                                        <td class="col-sm-1 col-md-1 text-center"><p class="price_table">@(item.product.Price * item.QuantityBuy)</p></td>
-                                        <td class="col-sm-1 col-md-1">
-                                            <form action="@Url.Action("Remove","Cart", new { id=item.product.ProductID})">
-                                                <button type="submit" class="bt_main">
-                                                    <i class="fa fa-trash"></i> Remove
-                                                </button>
-                                            </form>
-                                        </td>
-                                    </tr>
-                                }
-                            </tbody>
-                        </table>
+                            }
+                        </tbody>
+                    </table>
+                    @if (User.Identity.IsAuthenticated)
+                    {
                         <table class="table">
                             <tbody>
                                 <tr class="cart-form">
                                     <td class="actions">
-                                        <div class="coupon">
-                                            <input name="coupon_code" class="input-text" id="coupon_code" placeholder="Coupon code" type="text">
-                                            <input class="button" name="apply_coupon" value="Apply coupon" type="submit">
-                                        </div>
-                                        <input class="button" name="update_cart" value="Update cart" disabled="" type="submit">
+                                        <input type="text" placeholder="Address" name="Address" value="@Model.Address" />
+                                    </td>
+                                </tr>
+                                <tr class="cart-form">
+                                    <td class="actions">
+                                        <input type="text" placeholder="Email" name="Email" value="@Model.Email" />
+                                    </td>
+                                </tr>
+                                <tr class="cart-form">
+                                    <td class="actions">
+                                        <input type="text" placeholder="Phone Number" name="PhoneNumber" value="@Model.PhoneNumber" />
                                     </td>
                                 </tr>
                             </tbody>
                         </table>
-                    </div>
-                    <form action="@Url.Action("CheckOut","Cart")">
-                        <div class="shopping-cart-cart">
-                            <table>
-                                <tbody>
-                                    <tr>
-                                        <td><h5>Phone number</h5></td>
-                                        <td>
-                                            <input type="text" name="num"/>
-                                        </td>
-                                    </tr>
-                                    <tr class="head-table">
-                                        <td><h5>Cart Totals</h5></td>
-                                        <td class="text-right"></td>
-                                    </tr>
-                                    <tr>
-                                        <td><h4>Subtotal</h4></td>
-                                        <td class="text-right"><h4>$50.00</h4></td>
-                                    </tr>
-                                    <tr>
-                                        <td><h5>Estimated shipping</h5></td>
-                                        <td class="text-right"><h4>$5.00</h4></td>
-                                    </tr>
-                                    <tr>
-                                        <td><h3>Total</h3></td>
-                                        <td class="text-right"><h4>@ViewBag.total</h4></td>
-                                    </tr>
-                                    <tr>
-                                        <td><a href="@Url.Action("Menu","Home")">Continue Shopping...</a></td>
-                                        <td>
-                                            <button class="button" type="submit">Checkout</button>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </form>
+                    }
+                    else
+                    {
+                        <table class="table">
+                            <tbody>
+                                <tr class="cart-form">
+                                    <td class="actions">
+                                        <input type="text" placeholder="Address" name="Address" value="" />
+                                    </td>
+                                </tr>
+                                <tr class="cart-form">
+                                    <td class="actions">
+                                        <input type="text" placeholder="Email" name="Email" value="" />
+                                    </td>
+                                </tr>
+                                <tr class="cart-form">
+                                    <td class="actions">
+                                        <input type="text" placeholder="Phone Number" name="PhoneNumber" value="" />
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    }
                 </div>
-            }
+                <div class="shopping-cart-cart">
+                    <table>
+                        <tbody>
+                            <tr class="head-table">
+                                <td><h5>Cart Totals</h5></td>
+                                <td class="text-right"></td>
+                            </tr>
+                            <tr>
+                                <td><h3>Total</h3></td>
+                                <td class="text-right"><h4>@ViewBag.total</h4></td>
+                            </tr>
+                            <tr class="head-table">
+                                <td><h5>Cart Totals</h5></td>
+                                <td class="text-right"></td>
+                            </tr>
+                            <tr>
+                                <td> <label>Cash Payment</label></td>
+                                <td><input type="radio" value="Cash" name="payment" id="Cash" /></td>
+                            </tr>
+                            <tr>
+                                <td><label>Momo Payment</label></td>
+                                <td><input type="radio" value="Momo" name="payment" id="Momo" /></td>
+                            </tr>
+                            <tr>
+                                <td><label>Paypal Payment</label></td>
+                                <td><input type="radio" value="Paypal" name="payment" id="Paypal" /></td>
+                            </tr>
+                            <tr>
+                                <td><a href="@Url.Action("Menu","Home")">Continue Shopping...</a></td>
+                                <td>
+                                    <button class="bt_main" onclick="paymentMethod()">Checkout</button>
+                                </td>
+                                <td>
+                                    <form id="momoForm" action="@Url.Action("CheckOut","Cart")">
+                                        <input type="hidden" value="2" name="typePay" />
+                                        <input type="hidden" id="address" name="address" />
+                                        <input type="hidden" id="email" name="email" />
+                                        <input type="hidden" id="phoneNumber" name="phoneNumber" />
+                                    </form>
+                                </td>
+                                <td>
+                                    <form id="cashForm" action="@Url.Action("CheckOut","Cart")">
+                                        <input type="hidden" value="1" name="typePay" />
+                                        <input type="hidden" id="address1" name="address" />
+                                        <input type="hidden" id="email1" name="email" />
+                                        <input type="hidden" id="phoneNumber1" name="phoneNumber" />
+                                    </form>
+                                </td>
+                                <td>
+                                    <form id="paypalForm" action="@Url.Action("PaymentWithPaypal","Cart")">
+                                        <input type="hidden" id="address2" name="address" />
+                                        <input type="hidden" id="email2" name="email" />
+                                        <input type="hidden" id="phoneNumber2" name="phoneNumber" />
+                                    </form>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </div>
     </div>
 </div>
+
+<script>
+    function paymentMethod() {
+        var cash = document.getElementById("Cash").checked;
+        var momo = document.getElementById("Momo").checked;
+        var paypal = document.getElementById("Paypal").checked;
+
+        document.getElementById("address").value = document.getElementsByName("Address")[0].value;
+        document.getElementById("email").value = document.getElementsByName("Email")[0].value;
+        document.getElementById("phoneNumber").value = document.getElementsByName("PhoneNumber")[0].value;
+
+        document.getElementById("address1").value = document.getElementsByName("Address")[0].value;
+        document.getElementById("email1").value = document.getElementsByName("Email")[0].value;
+        document.getElementById("phoneNumber1").value = document.getElementsByName("PhoneNumber")[0].value;
+
+        document.getElementById("address2").value = document.getElementsByName("Address")[0].value;
+        document.getElementById("email2").value = document.getElementsByName("Email")[0].value;
+        document.getElementById("phoneNumber2").value = document.getElementsByName("PhoneNumber")[0].value;
+
+        if (momo == true) {
+           
+            document.getElementById("momoForm").submit();
+        }
+        else if (cash == true) {
+            
+            document.getElementById("cashForm").submit();
+        }
+        else if (paypal == true) {
+           
+            document.getElementById("paypalForm").submit();
+        }
+    }
+</script>
 
 
 

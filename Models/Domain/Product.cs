@@ -28,5 +28,6 @@ namespace TMDT_Web.Models.Domain
 
         public ICollection<OrderDetail> orderDetail { get; set; }
         public ICollection<Review> review { get; set; }
+        public ICollection<Others> others { get; set; }
     }
 }

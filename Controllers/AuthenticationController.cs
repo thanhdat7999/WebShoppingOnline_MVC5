@@ -73,6 +73,18 @@ namespace TMDT_Web.Controllers
         public ActionResult DoRegister([Bind(Include = "FirstName, LastName, UserName, PhoneNumber, Address, Age, Email, Password")] Account register)
         {
             var check = db.account.Count();
+            var checkEmail = db.account.ToList();
+            foreach(var item in checkEmail)
+            {
+                if(register.Email == item.Email)
+                {
+                    return RedirectToAction("", "");   
+                }
+                else
+                {
+
+                }
+            }
            
             Account account = new Account();
             account.FirstName = register.FirstName;

@@ -95,6 +95,11 @@ namespace TMDT_Web.Controllers
             if (User.Identity.IsAuthenticated)
             {
                 var orderDetail = db.orderDetail.Where(x => x.OrderID == id && x.Order.Account.UserName == User.Identity.Name).ToList();
+                //Tăng 2 ngày cho thời gian đặt hàng để đếm ngược
+                foreach(var item in orderDetail)
+                {
+                    ViewBag.time = item.Order.DateTimeOrder.AddDays(2);
+                }
                 ViewBag.orderDetail = orderDetail;
             }
             else
