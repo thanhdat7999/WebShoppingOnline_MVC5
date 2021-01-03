@@ -1,0 +1,111 @@
+﻿@model IEnumerable<TMDT_Web.Models.Domain.OrderDetail>
+@{
+    ViewBag.Title = "DetailManagement";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<!-- inner page banner -->
+<div id="inner_banner" class="section inner_banner_section">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="full">
+                    <div class="title-holder">
+                        <div class="title-holder-cell text-left">
+                            <h1 class="page-title">Companies List</h1>
+                            <ol class="breadcrumb">
+                                <li><a href="@Url.Action("Index","Home",new { area=""})">Home</a></li>
+                                <li class="active">Companies List</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end inner page banner -->
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="side_bar_blog col-lg-3">
+            <h4>OUR SERVICE</h4>
+            <div class="categary">
+                <ul>
+                    <li><a href="@Url.Action("Index","AdminHome",new { area= "Admin"})"><i class="fa fa-angle-right"></i> Home</a></li>
+                    <li><a href="@Url.Action("Management","Finance",new { area= "Admin"})"><i class="fa fa-angle-right"></i> Finance Management</a></li>
+                    <li><a href="@Url.Action("index","discount",new { area= "Admin"})"><i class="fa fa-angle-right"></i>Create Discount</a></li>
+                    <li><a href="@Url.Action("Index","Company",new { area= "Admin"})"><i class="fa fa-angle-right"></i> Companies</a></li>
+                    <li><a href="@Url.Action("Index","Brand",new { area= "Admin"})"><i class="fa fa-angle-right"></i> Brands</a></li>
+                    <li><a href="@Url.Action("Index","Product",new { area= "Admin"})"><i class="fa fa-angle-right"></i> Products</a></li>
+                    <li><a href="@Url.Action("Index","User",new { area= "Admin"})"><i class="fa fa-angle-right"></i> Users</a></li>
+                    <li><a href="@Url.Action("Index","Order",new { area= "Admin"})"><i class="fa fa-angle-right"></i> Orders</a></li>
+                    <li><a href="@Url.Action("ordersAccept","Order",new { area= "Admin"})"><i class="fa fa-angle-right"></i> Orders Accepted</a></li>
+                    <li><a href="@Url.Action("ordersWaiting","Order",new { area= "Admin"})"><i class="fa fa-angle-right"></i> Orders Waiting</a></li>
+                    <li><a href="@Url.Action("ordersTrans","Order",new { area= "Admin"})"><i class="fa fa-angle-right"></i> Orders Transported</a></li>
+                    <li><a href="@Url.Action("ordersFinish","Order",new { area= "Admin"})"><i class="fa fa-angle-right"></i> Orders Finish</a></li>
+                    <li><a href="@Url.Action("ordersCancel","Order",new { area= "Admin"})"><i class="fa fa-angle-right"></i> Orders Cancel</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="col-lg-9 float-left" style="margin-top:30px">
+            <div class="section padding_layout_1 Shopping_cart_section">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-9 col-md-9">
+                            <div class="product-table">
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th>Product</th>
+                                                <th>Order ID</th>
+                                                <th>Date Time</th>
+                                                <th>Quantity</th>
+                                                <th class="text-center">Price</th>
+                                                <th class="text-center">Total</th>
+                                                <th> </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach (var item in Model)
+                                            {
+                                            <tr>
+                                                <td class="col-sm-8 col-md-6">
+                                                    <div class="media">
+                                                        <a class="thumbnail pull-left" href="#"> <img class="media-object cart-img" src="~/Images/Products/@item.Product.Image" alt="#"></a>
+                                                        <div class="media-body">
+                                                            <h4 class="media-heading"><a href="#">@item.Product.ProductName</a></h4>
+                                                            <span>Product ID: </span><span class="text-success">@item.ProductID</span>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td class="col-sm-1 col-md-1 text-center"><p class="price_table">@item.OrderID</p></td>
+                                                <td class="col-sm-1 col-md-1 text-center"><p class="price_table">@item.Order.DateTimeOrder</p></td>
+                                                <td class="col-sm-1 col-md-1 text-center"><p class="price_table">@item.QuantityBuy</p></td>
+                                                <td class="col-sm-1 col-md-1 text-center"><p class="price_table">@item.Product.Price</p></td>
+                                                <td class="col-sm-1 col-md-1 text-center"><p class="price_table">@(item.Product.Price * item.QuantityBuy)</p></td>
+                                            </tr>
+                                            }
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="shopping-cart-cart">
+                                    <table>
+                                        <tbody>
+                                            <tr class="head-table">
+                                                <td><h3>Cart Totals:</h3></td>
+                                                <td><h3>@ViewBag.total</h3></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+

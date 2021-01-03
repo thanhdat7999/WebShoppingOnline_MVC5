@@ -1,0 +1,232 @@
+﻿@model IEnumerable<TMDT_Web.Models.Domain.Order>
+@{
+    ViewBag.Title = "ordersWaiting";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<!-- inner page banner -->
+<div id="inner_banner" class="section inner_banner_section">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="full">
+                    <div class="title-holder">
+                        <div class="title-holder-cell text-left">
+                            <h1 class="page-title">Order List</h1>
+                            <ol class="breadcrumb">
+                                <li><a href="@Url.Action("Index","Home",new { area=""})">Home</a></li>
+                                <li class="active">Order List</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end inner page banner -->
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="side_bar_blog col-lg-3">
+            <h4>OUR SERVICE</h4>
+            <div class="categary">
+                <ul>
+                    <li><a href="@Url.Action("Index","AdminHome",new { area= "Admin"})"><i class="fa fa-angle-right"></i> Home</a></li>
+                    <li><a href="@Url.Action("Management","Finance",new { area= "Admin"})"><i class="fa fa-angle-right"></i> Finance Management</a></li>
+                    <li><a href="@Url.Action("index","discount",new { area= "Admin"})"><i class="fa fa-angle-right"></i>Create Discount</a></li>
+                    <li><a href="@Url.Action("Index","Company",new { area= "Admin"})"><i class="fa fa-angle-right"></i> Companies</a></li>
+                    <li><a href="@Url.Action("Index","Brand",new { area= "Admin"})"><i class="fa fa-angle-right"></i> Brands</a></li>
+                    <li><a href="@Url.Action("Index","Product",new { area= "Admin"})"><i class="fa fa-angle-right"></i> Products</a></li>
+                    <li><a href="@Url.Action("Index","User",new { area= "Admin"})"><i class="fa fa-angle-right"></i> Users</a></li>
+                    <li><a href="@Url.Action("Index","Order",new { area= "Admin"})"><i class="fa fa-angle-right"></i> Orders</a></li>
+                    <li><a href="@Url.Action("ordersAccept","Order",new { area= "Admin"})"><i class="fa fa-angle-right"></i> Orders Accepted</a></li>
+                    <li><a href="@Url.Action("ordersWaiting","Order",new { area= "Admin"})"><i class="fa fa-angle-right"></i> Orders Waiting</a></li>
+                    <li><a href="@Url.Action("ordersTrans","Order",new { area= "Admin"})"><i class="fa fa-angle-right"></i> Orders Transported</a></li>
+                    <li><a href="@Url.Action("ordersFinish","Order",new { area= "Admin"})"><i class="fa fa-angle-right"></i> Orders Finish</a></li>
+                    <li><a href="@Url.Action("ordersCancel","Order",new { area= "Admin"})"><i class="fa fa-angle-right"></i> Orders Cancel</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="col-lg-9 float-left" style="margin-top:30px">
+            <p>
+                @Html.ActionLink("Create New", "Create")
+            </p>
+            <table class="table">
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.OrderID)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.DateTimeOrder)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Account.UserName)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Status)
+                    </th>
+                    <th>Payment Method</th>
+                    <th></th>
+                </tr>
+
+                @foreach (var item in Model)
+                {
+                    if (item.UserID == null)
+                    {
+                        <tr>
+                            <td>@item.OrderID</td>
+                            <td>@item.DateTimeOrder</td>
+                            <td></td>
+                            @if (item.Status == null)
+                            {
+                                <td>Waiting For Accept</td>
+                            }
+                            else if (item.Status == 1)
+                            {
+                                <td>Order Accepted</td>
+                            }
+                            else if (item.Status == 2)
+                            {
+                                <td>Order Canceled</td>
+                            }
+                            else if (item.Status == 3)
+                            {
+                                <td>Transport</td>
+                            }
+                            else if (item.Status == 4)
+                            {
+                                <td>Finish</td>
+                            }
+
+                            @if (item.TypePayment == 1)
+                            {
+                                <td>Cash payment</td>
+                            }
+                            else if (item.TypePayment == 2)
+                            {
+                                <td>Momo payment</td>
+                            }
+                            else
+                            {
+                                <td>Paypal payment</td>
+                            }
+                            <td>
+                                <div class="row">
+                                    <div class="col-sm-2">
+                                        <form action="@Url.Action("Accept","Order", new { id=item.OrderID})">
+                                            <input type="image" src="~/Templates/IT-Next/images/it_service/accept.png" alt="Submit" class="Button-Img" />
+                                            <label>Accept Order</label>
+                                        </form>
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <form action="@Url.Action("Transport","Order", new { id=item.OrderID})">
+                                            <input type="image" src="~/Templates/IT-Next/images/it_service/truck.png" alt="Submit" class="Button-Img" />
+                                            <label>Transport</label>
+                                        </form>
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <form action="@Url.Action("Finish","Order", new { id=item.OrderID})">
+                                            <input type="image" src="~/Templates/IT-Next/images/it_service/money.png" alt="Submit" class="Button-Img" />
+                                            <label>Finish</label>
+                                        </form>
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <form action="@Url.Action("Cancel","Order", new { id=item.OrderID})">
+                                            <input type="image" src="~/Templates/IT-Next/images/it_service/cancel.png" alt="Submit" class="Button-Img" />
+                                            <label>Cancel Order</label>
+                                        </form>
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <form action="@Url.Action("Detail","Order", new { id=item.OrderID})">
+                                            <input type="image" src="~/Templates/IT-Next/images/it_service/Detail.png" alt="Submit" class="Button-Img" />
+                                            <label>Detail Order</label>
+                                        </form>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                    else
+                    {
+                        <tr>
+                            <td>@item.OrderID</td>
+                            <td>@item.DateTimeOrder</td>
+                            <td>@item.Account.UserName</td>
+                            @if (item.Status == null)
+                            {
+                                <td>Waiting For Accept</td>
+                            }
+                            else if (item.Status == 1)
+                            {
+                                <td>Order Accepted</td>
+                            }
+                            else if (item.Status == 2)
+                            {
+                                <td>Order Canceled</td>
+                            }
+                            else if (item.Status == 3)
+                            {
+                                <td>Transport</td>
+                            }
+                            else if (item.Status == 4)
+                            {
+                                <td>Finish</td>
+                            }
+
+                            @if (item.TypePayment == 1)
+                            {
+                                <td>Cash payment</td>
+                            }
+                            else if (item.TypePayment == 2)
+                            {
+                                <td>Momo payment</td>
+                            }
+                            else
+                            {
+                                <td>Paypal payment</td>
+                            }
+                            <td>
+                                <div class="row">
+                                    <div class="col-sm-2">
+                                        <form action="@Url.Action("Accept","Order", new { id=item.OrderID})">
+                                            <input type="image" src="~/Templates/IT-Next/images/it_service/accept.png" alt="Submit" class="Button-Img" />
+                                            <label>Accept Order</label>
+                                        </form>
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <form action="@Url.Action("Transport","Order", new { id=item.OrderID})">
+                                            <input type="image" src="~/Templates/IT-Next/images/it_service/truck.png" alt="Submit" class="Button-Img" />
+                                            <label>Transport</label>
+                                        </form>
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <form action="@Url.Action("Finish","Order", new { id=item.OrderID})">
+                                            <input type="image" src="~/Templates/IT-Next/images/it_service/money.png" alt="Submit" class="Button-Img" />
+                                            <label>Finish</label>
+                                        </form>
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <form action="@Url.Action("Cancel","Order", new { id=item.OrderID})">
+                                            <input type="image" src="~/Templates/IT-Next/images/it_service/cancel.png" alt="Submit" class="Button-Img" />
+                                            <label>Cancel Order</label>
+                                        </form>
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <form action="@Url.Action("Detail","Order", new { id=item.OrderID})">
+                                            <input type="image" src="~/Templates/IT-Next/images/it_service/Detail.png" alt="Submit" class="Button-Img" />
+                                            <label>Detail Order</label>
+                                        </form>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                }
+            </table>
+        </div>
+    </div>
+</div>
+
+
+
+

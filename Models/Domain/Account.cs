@@ -17,13 +17,14 @@ namespace TMDT_Web.Models.Domain
         public int PhoneNumber { get; set; }
         public string Address { get; set; }
         public int Age { get; set; }
+        [DataType(DataType.EmailAddress, ErrorMessage = "E-mail not vaid")]
         [Required(ErrorMessage = "Type Your Email")]
         public string Email { get; set; }
         [Required(ErrorMessage = "Type Your Password")]
         public string Password { get; set; }
         public string Avatar { get; set; }
         public int? Points { get; set; }
-        public int Status { get; set; }
+        public string Status { get; set; }
         //------------------------------------------------------
         //------------------------------------------------------
         [ForeignKey("Role")]
@@ -33,6 +34,6 @@ namespace TMDT_Web.Models.Domain
         //------------------------------------------------------
         public ICollection<Order> order { get; set; }
         public ICollection<Review> review { get; set; }
-        public ICollection<Others> others { get; set; }
+     
     }
 }

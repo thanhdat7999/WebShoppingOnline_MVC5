@@ -81,18 +81,22 @@
                                             }
                                             <div class="row">
                                                 <div class="col-sm-12">
+                                                    <div>
+                                                        <label style="font-weight:bold; color:red">@ViewBag.error</label>
+                                                    </div>
                                                     <div class="full review_bt_section">
                                                         <div class="float-right"> <a class="btn sqaure_bt" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">Leave a Review</a> </div>
                                                     </div>
                                                     <div class="full">
                                                         <div id="collapseExample" class="full collapse commant_box">
-                                                            <form accept-charset="UTF-8" action="@Url.Action("Review","Home", new { proid=Model.ProductID})" method="post">
+                                                            <form id="review" accept-charset="UTF-8" action="@Url.Action("Review","Home", new { proid=Model.ProductID})" method="post">
                                                                 <input id="ratings-hidden" name="rating" type="hidden">
                                                                 <textarea class="form-control animated" cols="50" id="new-review" name="Comment" placeholder="Enter your review here..." required=""></textarea>
-                                                                <div class="full_bt center">
-                                                                    <button class="btn sqaure_bt" type="submit">Comment</button>
-                                                                </div>
+
                                                             </form>
+                                                            <div class="full_bt center">
+                                                                <button class="btn sqaure_bt" onclick="reviewBtn()">Comment</button>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -118,20 +122,40 @@
                 <div class="row">
                     @foreach (var item in ViewData["products"] as IEnumerable<TMDT_Web.Models.Domain.Product>)
                     {
-                        <div class="col-md-4 col-sm-6 col-xs-12 margin_bottom_30_all">
-                            <div class="product_list">
-                                <div class="product_img"><a href="@Url.Action("Detail","Home",new { id=item.ProductID})"><img class="img-responsive card-img" src="~/Images/Products/@item.Image" alt=""> </a></div>
-                                <div class="product_detail_btm">
-                                    <div class="center">
-                                        <h4><a href="it_shop_detail.html">@item.ProductName</a></h4>
+                        if (item.Quantity <= 0)
+                        {
+                            <div class="col-md-4 col-sm-6 col-xs-12 margin_bottom_30_all" style="display:none">
+                                <div class="product_list">
+                                    <div class="product_img"><a href="@Url.Action("Detail","Home",new { id=item.ProductID})"><img class="img-responsive card-img" src="~/Images/Products/@item.Image" alt=""> </a></div>
+                                    <div class="product_detail_btm">
+                                        <div class="center">
+                                            <h4><a href="it_shop_detail.html">@item.ProductName</a></h4>
+                                        </div>
+                                        <div class="product_price">
+                                            <p><span class="old_price">$15.00</span> – <span class="new_price">@item.Price VND</span></p>
+                                        </div>
+                                        <div class="button_Section_cont center"> <a class="btn dark_gray_bt" href="@Url.Action("Buy","Cart",new { id=item.ProductID})">Thêm Vào Giỏ</a> </div>
                                     </div>
-                                    <div class="product_price">
-                                        <p><span class="old_price">$15.00</span> – <span class="new_price">@item.Price VND</span></p>
-                                    </div>
-                                    <div class="button_Section_cont center"> <a class="btn dark_gray_bt" href="#">Contact us</a> </div>
                                 </div>
                             </div>
-                        </div>
+                        }
+                        else
+                        {
+                            <div class="col-md-4 col-sm-6 col-xs-12 margin_bottom_30_all">
+                                <div class="product_list">
+                                    <div class="product_img"><a href="@Url.Action("Detail","Home",new { id=item.ProductID})"><img class="img-responsive card-img" src="~/Images/Products/@item.Image" alt=""> </a></div>
+                                    <div class="product_detail_btm">
+                                        <div class="center">
+                                            <h4><a href="it_shop_detail.html">@item.ProductName</a></h4>
+                                        </div>
+                                        <div class="product_price">
+                                            <p><span class="old_price">$15.00</span> – <span class="new_price">@item.Price VND</span></p>
+                                        </div>
+                                        <div class="button_Section_cont center"> <a class="btn dark_gray_bt" href="@Url.Action("Buy","Cart",new { id=item.ProductID})">Thêm Vào Giỏ</a> </div>
+                                    </div>
+                                </div>
+                            </div>
+                        }
                     }
                     <br />
                     <div class="center col-md-12 col-sm-6 col-xs-12 margin_bottom_30_all">
@@ -178,3 +202,16 @@
     </div>
 </div>
 <!-- end section -->
+
+
+<script>
+    function reviewBtn() {
+        @*if (@User.Identity.IsAuthenticated) {
+            document.getElementById("review").submit();
+        }
+        else {
+            document.getElementById("error").innerHTML = "You have to login to comment this post!";
+        }*@
+        document.getElementById("review").submit();
+    }
+</script>

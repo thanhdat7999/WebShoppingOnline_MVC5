@@ -1,0 +1,49 @@
+﻿@model TMDT_Web.Models.Domain.Discount
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<form accept-charset="@Url.Action("Edit","Discount")" method="post" enctype="multipart/form-data">
+    <div class="row">
+        <div class="col-lg-4"></div>
+        <div class="col-lg-4">
+            <ul>
+                <li>
+                    <input type="hidden" name="EventID" value="@Model.EventID" />
+                </li>
+                <li>
+                    <input type="text" name="Event" value="@Model.Event" />
+                </li>
+                <li>
+                    <input type="text" name="DiscountPercent" value="@Model.DiscountPercent" />
+                </li>
+                <li>
+                    <input type="text" name="Quantity" value="@Model.Quantity" />
+                </li>
+                <li>
+                    <input type="hidden" name="CodeRnd" value="@Model.CodeRnd" />
+                </li>
+                <li>
+                    <label>@Model.Status</label>
+                    <select name="Status">
+                        <option value="Publish">Publish</option>
+                        <option value="Private">Private</option>
+                    </select>
+                </li>
+                <li>
+                    <textarea name="Content">@Model.Content</textarea>
+                </li>
+                <li>
+                    <img src="~/Images/Imgs/@Model.Image" />
+                    <input type="hidden" name="Image" value="@Model.Image" />
+                    <input type="file" name="EImage" />
+                </li>
+                <li><input type="submit" value="Edit" /></li>
+                <li><a href="@Url.Action("Index","Discount")">Back...</a></li>
+            </ul>
+        </div>
+        <div class="col-lg-4"></div>
+    </div>
+</form>
+

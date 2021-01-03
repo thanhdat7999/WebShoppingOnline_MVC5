@@ -32,11 +32,18 @@
             <div class="categary">
                 <ul>
                     <li><a href="@Url.Action("Index","AdminHome",new { area= "Admin"})"><i class="fa fa-angle-right"></i> Home</a></li>
+                    <li><a href="@Url.Action("Management","Finance",new { area= "Admin"})"><i class="fa fa-angle-right"></i> Finance Management</a></li>
+                    <li><a href="@Url.Action("index","discount",new { area= "Admin"})"><i class="fa fa-angle-right"></i>Create Discount</a></li>
                     <li><a href="@Url.Action("Index","Company",new { area= "Admin"})"><i class="fa fa-angle-right"></i> Companies</a></li>
                     <li><a href="@Url.Action("Index","Brand",new { area= "Admin"})"><i class="fa fa-angle-right"></i> Brands</a></li>
                     <li><a href="@Url.Action("Index","Product",new { area= "Admin"})"><i class="fa fa-angle-right"></i> Products</a></li>
                     <li><a href="@Url.Action("Index","User",new { area= "Admin"})"><i class="fa fa-angle-right"></i> Users</a></li>
                     <li><a href="@Url.Action("Index","Order",new { area= "Admin"})"><i class="fa fa-angle-right"></i> Orders</a></li>
+                    <li><a href="@Url.Action("ordersAccept","Order",new { area= "Admin"})"><i class="fa fa-angle-right"></i> Orders Accepted</a></li>
+                    <li><a href="@Url.Action("ordersWaiting","Order",new { area= "Admin"})"><i class="fa fa-angle-right"></i> Orders Waiting</a></li>
+                    <li><a href="@Url.Action("ordersTrans","Order",new { area= "Admin"})"><i class="fa fa-angle-right"></i> Orders Transported</a></li>
+                    <li><a href="@Url.Action("ordersFinish","Order",new { area= "Admin"})"><i class="fa fa-angle-right"></i> Orders Finish</a></li>
+                    <li><a href="@Url.Action("ordersCancel","Order",new { area= "Admin"})"><i class="fa fa-angle-right"></i> Orders Cancel</a></li>
                 </ul>
             </div>
         </div>
@@ -44,25 +51,17 @@
             <p>
                 @Html.ActionLink("Create New", "Create")
             </p>
+            <h3>@ViewBag.error</h3>
             <table class="table">
                 <tr>
                     <th>
-                        @Html.DisplayNameFor(model => model.FirstName) and @Html.DisplayNameFor(model => model.LastName)
+                        Full Name
                     </th>
                     <th>
                         @Html.DisplayNameFor(model => model.UserName)
                     </th>
                     <th>
-                        @Html.DisplayNameFor(model => model.Address)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.Age)
-                    </th>
-                    <th>
                         @Html.DisplayNameFor(model => model.Email)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.Password)
                     </th>
                     <th>
                         @Html.DisplayNameFor(model => model.Role.setRole)
@@ -77,15 +76,12 @@
                             @item.FirstName <span></span>@item.LastName
                         </td>
                         <td>@item.UserName</td>
-                        <td>@item.Address</td>
-                        <td>@item.Age</td>
                         <td>@item.Email</td>
-                        <td>@item.Password</td>
                         <td>@item.Role.setRole</td>
                         <td>
                             @Html.ActionLink("Edit", "Edit", new { id = item.UserID }) |
-                            @Html.ActionLink("Detail", "Detail", new { }) |
-                            @Html.ActionLink("Delete", "Delete", new { id = item.UserID })
+                            @Html.ActionLink("Delete", "Delete", new { id = item.UserID }) |
+                            @Html.ActionLink("Order", "UserOrder", new { id = item.UserID })
                         </td>
                     </tr>
                 }

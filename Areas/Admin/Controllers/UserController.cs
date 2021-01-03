@@ -13,8 +13,9 @@ namespace TMDT_Web.Areas.Admin.Controllers
     {
         DataContext db = new DataContext();
         // GET: Admin/Users
-        public ActionResult Index()
+        public ActionResult Index(string error)
         {
+            ViewBag.error = error;
             var users = db.account.ToList();
             return View(users);
         }
@@ -72,6 +73,23 @@ namespace TMDT_Web.Areas.Admin.Controllers
             db.account.Remove(account);
             db.SaveChanges();
             return RedirectToAction("index", "user");
+        }
+        public ActionResult UserOrder(int? id)
+        {
+            var orders = db.order.ToList();
+            foreach (var item in orders)
+            {
+                if (item.UserID == id)
+                {
+                    var order = db.order.Where(x => x.UserID == id).ToList();
+                    return View(order);
+                }
+                else
+                {
+                    return RedirectToAction("index", "user", new { error="User dont have order!"});
+                }
+            }
+            return View();
         }
     }
 }

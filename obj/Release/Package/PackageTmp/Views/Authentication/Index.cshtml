@@ -56,41 +56,110 @@
                     </td>
                 </tr>
                 <tr>
+                    <th>Status</th>
+                    <td>
+                        <ul>
+                            <li><p style="font-weight:bold">@Model.Status</p></li>
+                            <li><p style="font-weight:bold">Point: @Model.Points P</p></li>
+                            <li style="color:red">@ViewBag.notify</li>
+                            @if (ViewBag.check == 1)
+                            {
+                                <li>
+                                    <form action="@Url.Action("decentralization","Authentication")">
+                                        <input type="submit" value="Update" />
+                                    </form>
+                                </li>
+                            }
+                            else
+                            {
+                                <li></li>
+                            }
+                        </ul>
+                    </td>
+                </tr>
+                <tr>
                     <th>Full Name:</th>
-                    <td>@Model.FirstName @Model.LastName</td>
+                    <td>
+                        <p style="font-weight:bold"> @Model.FirstName @Model.LastName</p>
+                        <form action="@Url.Action("ChangeFullName","Authentication", new { id=Model.UserID})">
+                            <ul id="fullname" style="display:none">
+                                <li>First Name</li>
+                                <li><input type="text" name="FirstName" placeholder="Type your first name..." value="@Model.FirstName" /></li>
+                                <li>Last Name</li>
+                                <li><input type="text" name="LastName" placeholder="Type your last name..." value="@Model.LastName" /></li>
+                                <li><input type="submit" value="Change" /></li>
+                            </ul>
+                        </form>
+                    </td>
+                    <td><button onclick="ShowHideFullName()">Edit</button></td>
+                </tr>
+                <tr>
+                    <th>User Name:</th>
+                    <td>
+                        <p style="font-weight:bold">@Model.UserName</p>
+                    </td>
                     <td></td>
                 </tr>
                 <tr>
                     <th>Address:</th>
-                    <td>@Model.Address</td>
-                    <td></td>
+                    <td>
+                        <p style="font-weight:bold">@Model.Address</p>
+                        <form action="@Url.Action("ChangeAddress","Authentication", new { id=Model.UserID})">
+                            <ul id="address" style="display:none">
+                                <li>Address</li>
+                                <li><input type="text" name="Address" placeholder="Type your address..." value="@Model.Address" /></li>
+                                <li><input type="submit" value="Change" /></li>
+                            </ul>
+                        </form>
+                    </td>
+                    <td><button onclick="ShowHideAddress()">Edit</button></td>
                 </tr>
                 <tr>
                     <th>Age:</th>
-                    <td>@Model.Age</td>
-                    <td></td>
+                    <td>
+                        <p style="font-weight:bold">@Model.Age</p>
+                        <form action="@Url.Action("ChangeAge","Authentication", new { id=Model.UserID})">
+                            <ul id="age" style="display:none">
+                                <li>Age</li>
+                                <li><input type="text" name="Age" placeholder="Type your age..." value="@Model.Age" /></li>
+                                <li><input type="submit" value="Change" /></li>
+                            </ul>
+                        </form>
+                    </td>
+                    <td><button onclick="ShowHideAge()">Edit</button></td>
                 </tr>
                 <tr>
                     <th>Email:</th>
-                    <td>@Model.Email</td>
-                    <td></td>
+                    <td>
+                        <p style="font-weight:bold">@Model.Email</p>
+                        <form action="@Url.Action("ChangeEmail","Authentication", new { id=Model.UserID})">
+                            <ul id="mail" style="display:none">
+                                <li>Email</li>
+                                <li><input type="text" name="Mail" placeholder="Type your email..." value="@Model.Email" /></li>
+                                <li><input type="submit" value="Change" /></li>
+                                <li style="color:red">@ViewBag.errorEmail</li>
+                            </ul>
+                        </form>
+                    </td>
+                    <td><button onclick="ShowHideMail()">Edit</button></td>
                 </tr>
                 <tr>
                     <th>Password:</th>
                     <td>
                         <form action="@Url.Action("ChangePassword","Authentication", new { id=Model.UserID})">
-                            <ul id="PW">
+                            <ul id="PW" style="display:none">
                                 <li>Current Password</li>
-                                <li><input type="password" value="@Model.Password" name="cpw" /></li>
+                                <li><input type="password" value="" name="cpw" /></li>
                                 <li>New Password</li>
                                 <li><input type="password" name="npw" /></li>
                                 <li>Confirm New Password</li>
                                 <li><input type="password" name="cnpw" /></li>
                                 <li><button type="submit">Change Password</button></li>
+                                <li style="color:red">@ViewBag.error</li>
                             </ul>
                         </form>
                     </td>
-                    <td><button onclick="ShowHide()">Edit</button></td>
+                    <td><button onclick="ShowHidePassWord()">Edit</button></td>
                 </tr>
             </table>
         </div>
@@ -98,8 +167,44 @@
 </div>
 <!-- Script -->
 <script>
-    function ShowHide() {
+    function ShowHidePassWord() {
         var x = document.getElementById("PW");
+        if (x.style.display == "none") {
+            x.style.display = "block";
+        }
+        else {
+            x.style.display = "none";
+        }
+    }
+    function ShowHideFullName() {
+        var x = document.getElementById("fullname");
+        if (x.style.display == "none") {
+            x.style.display = "block";
+        }
+        else {
+            x.style.display = "none";
+        }
+    }
+    function ShowHideAddress() {
+        var x = document.getElementById("address");
+        if (x.style.display == "none") {
+            x.style.display = "block";
+        }
+        else {
+            x.style.display = "none";
+        }
+    }
+    function ShowHideAge() {
+        var x = document.getElementById("age");
+        if (x.style.display == "none") {
+            x.style.display = "block";
+        }
+        else {
+            x.style.display = "none";
+        }
+    }
+    function ShowHideMail() {
+        var x = document.getElementById("mail");
         if (x.style.display == "none") {
             x.style.display = "block";
         }

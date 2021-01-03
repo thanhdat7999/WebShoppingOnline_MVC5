@@ -232,13 +232,13 @@
                             <tr>
                                 @if (User.Identity.IsAuthenticated)
                                 {
-                                    <td><a href="@Url.Action("HistoryOrder","OrderProgress")">Continue Shopping...</a></td>
+                                    <td><a href="@Url.Action("HistoryOrder","OrderProgress")">Back to Order History...</a></td>
                                 }
                                 else
                                 {
                                     foreach (var item in ViewBag.orderDetail)
                                     {
-                                        <td><a href="@Url.Action("HistoryOrder","OrderProgress", new { num= item.Order.OrderPhoneNumber})">Continue Shopping...</a></td>
+                                        <td><a href="@Url.Action("HistoryOrder","OrderProgress", new { num= item.Order.OrderPhoneNumber})">Back to Order History...</a></td>
                                     }
                                 }
                                 <td>

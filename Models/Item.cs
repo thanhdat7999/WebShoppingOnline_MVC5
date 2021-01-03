@@ -10,10 +10,12 @@ namespace TMDT_Web.Models
     {
         public Product product { get; set; }
         public int QuantityBuy { get; set; }
-        public Item(Product product, int quantitybuy)
+        public int FinalTotal { get; set; }
+        public Item(Product product, int quantitybuy, int finalTotal)
         {
             this.product = product;
             QuantityBuy= quantitybuy;
+            FinalTotal = finalTotal;
         }
     }
 }

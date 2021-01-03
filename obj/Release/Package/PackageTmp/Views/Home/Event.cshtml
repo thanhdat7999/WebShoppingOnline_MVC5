@@ -1,0 +1,47 @@
+﻿@model IEnumerable<TMDT_Web.Models.Domain.Discount>
+@{
+    ViewBag.Title = "Event";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<!-- inner page banner -->
+<div id="inner_banner" class="section inner_banner_section">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="full">
+                    <div class="title-holder">
+                        <div class="title-holder-cell text-left">
+                            <h1 class="page-title">Event Page</h1>
+                            <ol class="breadcrumb">
+                                <li><a href="index.html">Home</a></li>
+                                <li class="active">Event Page</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end inner page banner -->
+<div class="row">
+    @foreach (var item in Model)
+    {
+        <div class="col-lg-2"></div>
+        <div class="col-lg-8">
+            <h2 style="text-align:center">@item.Event</h2>
+            <img src="~/Images/Imgs/@item.Image" style="height:30%; width:100%" />
+            <h4 style="text-align:center">
+                Code: @item.CodeRnd
+            </h4>
+            <h4 style="text-align:center">
+                Quantity: @item.Quantity
+            </h4>
+            <textarea cols="120" rows="20" readonly>
+                @item.Content
+            </textarea>
+            <hr />
+        </div>
+        <div class="col-lg-2"></div>
+    }
+</div>

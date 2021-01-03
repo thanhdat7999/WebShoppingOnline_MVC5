@@ -32,11 +32,18 @@
             <div class="categary">
                 <ul>
                     <li><a href="@Url.Action("Index","AdminHome",new { area= "Admin"})"><i class="fa fa-angle-right"></i> Home</a></li>
+                    <li><a href="@Url.Action("Management","Finance",new { area= "Admin"})"><i class="fa fa-angle-right"></i> Finance Management</a></li>
+                    <li><a href="@Url.Action("index","discount",new { area= "Admin"})"><i class="fa fa-angle-right"></i>Create Discount</a></li>
                     <li><a href="@Url.Action("Index","Company",new { area= "Admin"})"><i class="fa fa-angle-right"></i> Companies</a></li>
+                    <li><a href="@Url.Action("Index","Brand",new { area= "Admin"})"><i class="fa fa-angle-right"></i> Brands</a></li>
                     <li><a href="@Url.Action("Index","Product",new { area= "Admin"})"><i class="fa fa-angle-right"></i> Products</a></li>
                     <li><a href="@Url.Action("Index","User",new { area= "Admin"})"><i class="fa fa-angle-right"></i> Users</a></li>
                     <li><a href="@Url.Action("Index","Order",new { area= "Admin"})"><i class="fa fa-angle-right"></i> Orders</a></li>
-                    <li><a href="@Url.Action("Index","Brand",new { area= "Admin"})"><i class="fa fa-angle-right"></i> Brands</a></li>
+                    <li><a href="@Url.Action("ordersAccept","Order",new { area= "Admin"})"><i class="fa fa-angle-right"></i> Orders Accepted</a></li>
+                    <li><a href="@Url.Action("ordersWaiting","Order",new { area= "Admin"})"><i class="fa fa-angle-right"></i> Orders Waiting</a></li>
+                    <li><a href="@Url.Action("ordersTrans","Order",new { area= "Admin"})"><i class="fa fa-angle-right"></i> Orders Transported</a></li>
+                    <li><a href="@Url.Action("ordersFinish","Order",new { area= "Admin"})"><i class="fa fa-angle-right"></i> Orders Finish</a></li>
+                    <li><a href="@Url.Action("ordersCancel","Order",new { area= "Admin"})"><i class="fa fa-angle-right"></i> Orders Cancel</a></li>
                 </ul>
             </div>
         </div>

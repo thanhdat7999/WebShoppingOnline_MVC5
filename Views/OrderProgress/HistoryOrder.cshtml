@@ -55,12 +55,19 @@
                         else if (item.Status == 1)
                         {
                             <td>Accepted</td>
-                         
+
                         }
-                        else
+                        else if (item.Status == 2)
                         {
                             <td>Cancel</td>
-                      
+                        }
+                        else if (item.Status == 3)
+                        {
+                            <td>Transport</td>
+                        }
+                        else if (item.Status == 4)
+                        {
+                            <td>Finish</td>
                         }
 
                         @if (item.TypePayment == 1)
@@ -100,26 +107,33 @@
                         </tr>
                         @foreach (var item in ViewBag.order)
                         {
-                            <tr>
-                                <td>@item.OrderID</td>
-                                <td>@item.DateTimeOrder</td>
-                                <td>@item.OrderPhoneNumber</td>
-                                @if (item.Status == null)
-                                {
-                                    <td>Waiting for accept</td>
-                                }
-                                else if (item.Status == 1)
-                                {
-                                    <td>Accepted</td>
-                                    <td></td>
-                                }
-                                else
-                                {
-                                    <td>Cancel</td>
-                                    <td></td>
-                                }
-                                <td><a href="@Url.Action("OrderDetail","OrderProgress",new { id=item.OrderID})">View Detail...</a></td>
-                            </tr>
+                    <tr>
+                        <td>@item.OrderID</td>
+                        <td>@item.DateTimeOrder</td>
+                        <td>@item.OrderPhoneNumber</td>
+                        @if (item.Status == null)
+                        {
+                            <td>Waiting for accept</td>
+                        }
+                        else if (item.Status == 1)
+                        {
+                            <td>Accepted</td>
+
+                        }
+                        else if (item.Status == 2)
+                        {
+                            <td>Cancel</td>
+                        }
+                        else if (item.Status == 3)
+                        {
+                            <td>Transport</td>
+                        }
+                        else if (item.Status == 4)
+                        {
+                            <td>Finish</td>
+                        }
+                        <td><a href="@Url.Action("OrderDetail","OrderProgress",new { id=item.OrderID})">View Detail...</a></td>
+                    </tr>
                         }
                     </table>
                 </div>

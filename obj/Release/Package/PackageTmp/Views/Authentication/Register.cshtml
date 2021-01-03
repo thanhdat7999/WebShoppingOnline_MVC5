@@ -38,13 +38,20 @@
                         </div>
                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 appointment_form">
                             <div class="form_section">
-                                <form class="form_contant" action="@Url.Action("DoRegister","Authentication")" method="post">
+                                <form class="form_contant" action="@Url.Action("DoRegister", "Authentication")" method="post">
                                     <fieldset class="row">
                                         <div class="field col-lg-6 col-md-6 col-sm-12 col-xs-12">
                                             <input class="field_custom" placeholder="FirstName *" type="text" name="FirstName" required>
                                         </div>
                                         <div class="field col-lg-6 col-md-6 col-sm-12 col-xs-12">
                                             <input class="field_custom" placeholder="LastName *" type="text" name="LastName" required>
+                                        </div>
+                                        <div class="field col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                                            <input class="field_custom" placeholder="User Name *" type="text" name="UserName" required>
+                                            <p style="color:red">@ViewBag.errorUser</p>
+                                        </div>
+                                        <div class="field col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                                            <input class="field_custom" placeholder="Phone Number *" type="text" name="PhoneNumber" required>
                                         </div>
                                         <div class="field col-lg-6 col-md-6 col-sm-12 col-xs-12">
                                             <input class="field_custom" placeholder="Address *" type="text" name="Address" required>
@@ -54,6 +61,7 @@
                                         </div>
                                         <div class="field col-lg-6 col-md-6 col-sm-12 col-xs-12">
                                             <input class="field_custom" placeholder="Email *" type="text" name="Email" required>
+                                            <label style="color:red">@ViewBag.errorEmail</label>
                                         </div>
                                         <div class="field col-lg-6 col-md-6 col-sm-12 col-xs-12">
                                             <input class="field_custom" placeholder="Password *" type="password" name="Password" required>
@@ -77,3 +85,6 @@
 </div>
 
 
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

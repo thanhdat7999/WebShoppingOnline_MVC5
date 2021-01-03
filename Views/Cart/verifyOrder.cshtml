@@ -1,0 +1,228 @@
+﻿@using TMDT_Web.Models;
+@{
+    ViewBag.Title = "verifyOrder";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="row">
+    <div class="col-md-4"></div>
+    <div class="col-md-4">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Product</th>
+                    <th>Quantity</th>
+                    <th class="text-center">Price</th>
+                    <th class="text-center">Total</th>
+                    <th> </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (Item item in (List<Item>)Session["cart"])
+                {
+                    <tr>
+                        <td class="col-sm-4 col-md-4">
+                            <div class="media">
+                                <a class="thumbnail pull-left" href="#"> <img class="media-object cart-img" src="~/Images/Products/@item.product.Image" alt="#"></a>
+                                <div class="media-body">
+                                    <h4 class="media-heading"><a href="#">@item.product.ProductName</a></h4>
+                                    <span>Product ID: </span><span class="text-success">@item.product.ProductID</span>
+                                </div>
+                            </div>
+                        </td>
+                        <td class="col-sm-1 col-md-1 text-center"><p class="price_table">@item.QuantityBuy</p></td>
+                        <td class="col-sm-1 col-md-1 text-center"><p class="price_table">@item.product.Price</p></td>
+                        <td class="col-sm-1 col-md-1 text-center"><p class="price_table">@(item.product.Price * item.QuantityBuy)</p></td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <div class="shopping-cart-cart">
+            @if (ViewBag.payment == "Paypal")
+            {
+                <form action="@Url.Action("PaymentWithPaypal","cart")">
+                    <input type="hidden" name="phoneNumber" value="@ViewBag.phoneNumber" />
+                    <input type="hidden" name="address" value="@ViewBag.address" />
+                    <input type="hidden" name="email" value="@ViewBag.email" />
+
+                    <table>
+                        <tbody>
+                            <tr class="head-table">
+                                <td><h5>Address:</h5></td>
+                                <td><label style="font-weight:bold">@ViewBag.address</label></td>
+                            </tr>
+                            <tr class="head-table">
+                                <td><h5>Phone Number:</h5></td>
+                                <td><label style="font-weight:bold">@ViewBag.phoneNumber</label></td>
+                            </tr>
+                            <tr class="head-table">
+                                <td><h5>Email:</h5></td>
+                                <td><label style="font-weight:bold">@ViewBag.email</label></td>
+                            </tr>
+                            <tr class="head-table">
+                                <td><h5>Coupon Code:</h5></td>
+                                <td><label style="font-weight:bold">@ViewBag.Coupon</label></td>
+                            </tr>
+                            <tr class="head-table">
+                                <td><h5>Total Money:</h5></td>
+                                <td><label style="font-weight:bold">@ViewBag.total VND</label></td>
+                            </tr>
+                            <tr class="head-table">
+                                <td><h5>Ship:</h5></td>
+                                <td><label style="font-weight:bold">@ViewBag.ship VND</label></td>
+                            </tr>
+                            <tr class="head-table">
+                                <td><h5>Tax:</h5></td>
+                                <td><label style="font-weight:bold">@ViewBag.tax</label></td>
+                            </tr>
+                            <tr class="head-table">
+                                <td><h5>Status:</h5></td>
+                                <td><label style="font-weight:bold">@ViewBag.Status</label></td>
+                            </tr>
+                            <tr class="head-table">
+                                <td><h5>Final Total Money:</h5></td>
+                                <td><label style="font-weight:bold">@Session["finalTotal"] VND</label></td>
+                            </tr>
+                            <tr class="head-table">
+                                <td><h5>Payment Method:</h5></td>
+                                <td><label style="font-weight:bold">Paypal</label></td>
+                            </tr>
+                            <tr>
+                                <td><a href="@Url.Action("index","cart")">Back to Cart...</a></td>
+                                <td><input class="bt_main" type="submit" value="Checkout" /></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </form>
+            }
+            else if (ViewBag.payment == "Momo")
+            {
+                <form action="@Url.Action("CheckOut","cart")">
+                    <input type="hidden" name="phoneNumber" value="@ViewBag.phoneNumber" />
+                    <input type="hidden" name="address" value="@ViewBag.address" />
+                    <input type="hidden" name="email" value="@ViewBag.email" />
+                    <input type="hidden" name="typePay" value="2" />
+                    <input type="hidden" name="final" value="@ViewBag.final" />
+                    <table>
+                        <tbody>
+                            <tr class="head-table">
+                                <td><h5>Address:</h5></td>
+                                <td><label style="font-weight:bold">@ViewBag.address</label></td>
+                            </tr>
+                            <tr class="head-table">
+                                <td><h5>Phone Number:</h5></td>
+                                <td><label style="font-weight:bold">@ViewBag.phoneNumber</label></td>
+                            </tr>
+                            <tr class="head-table">
+                                <td><h5>Email:</h5></td>
+                                <td><label style="font-weight:bold">@ViewBag.email</label></td>
+                            </tr>
+                            <tr class="head-table">
+                                <td><h5>Coupon Code:</h5></td>
+                                <td><label style="font-weight:bold">@ViewBag.Coupon</label></td>
+                            </tr>
+                            <tr class="head-table">
+                                <td><h5>Total Money:</h5></td>
+                                <td><label style="font-weight:bold">@ViewBag.total VND</label></td>
+                            </tr>
+                            <tr class="head-table">
+                                <td><h5>Ship:</h5></td>
+                                <td><label style="font-weight:bold">@ViewBag.ship VND</label></td>
+                            </tr>
+                            <tr class="head-table">
+                                <td><h5>Tax:</h5></td>
+                                <td><label style="font-weight:bold">@ViewBag.tax</label></td>
+                            </tr>
+                            <tr class="head-table">
+                                <td><h5>Status:</h5></td>
+                                <td><label style="font-weight:bold">@ViewBag.Status</label></td>
+                            </tr>
+                            <tr class="head-table">
+                                <td><h5>Final Total Money:</h5></td>
+                                <td><label style="font-weight:bold">@ViewBag.final VND</label></td>
+                            </tr>
+                            <tr class="head-table">
+                                <td><h5>Payment Method:</h5></td>
+                                <td><label style="font-weight:bold">Momo</label></td>
+                            </tr>
+                            <tr>
+                                <td><a href="@Url.Action("index","cart")">Back to Cart...</a></td>
+                                <td><input class="bt_main" type="submit" value="Checkout" /></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </form>
+            }
+            else if (ViewBag.payment == "Cash")
+            {
+                <form action="@Url.Action("CheckOut","cart")">
+                    <input type="hidden" name="phoneNumber" value="@ViewBag.phoneNumber" />
+                    <input type="hidden" name="address" value="@ViewBag.address" />
+                    <input type="hidden" name="email" value="@ViewBag.email" />
+                    <input type="hidden" name="typePay" value="1" />
+                    <input type="hidden" name="final" value="@ViewBag.final" />
+                    <input type="hidden" name="codeDiscount" value="@ViewBag.codeDiscount" />
+                    <table>
+                        <tbody>
+                            <tr class="head-table">
+                                <td><h5>Address:</h5></td>
+                                <td><label style="font-weight:bold">@ViewBag.address</label></td>
+                            </tr>
+                            <tr class="head-table">
+                                <td><h5>Phone Number:</h5></td>
+                                <td><label style="font-weight:bold">@ViewBag.phoneNumber</label></td>
+                            </tr>
+                            <tr class="head-table">
+                                <td><h5>Email:</h5></td>
+                                <td><label style="font-weight:bold">@ViewBag.email</label></td>
+                            </tr>
+                            <tr class="head-table">
+                                <td><h5>Coupon Code:</h5></td>
+                                <td><label style="font-weight:bold">@ViewBag.Coupon</label></td>
+                            </tr>
+                            <tr class="head-table">
+                                <td><h5>Total Money:</h5></td>
+                                <td><label style="font-weight:bold">@ViewBag.total VND</label></td>
+                            </tr>
+                            <tr class="head-table">
+                                <td><h5>Ship:</h5></td>
+                                <td><label style="font-weight:bold">@ViewBag.ship VND</label></td>
+                            </tr>
+                            <tr class="head-table">
+                                <td><h5>Tax:</h5></td>
+                                <td><label style="font-weight:bold">@ViewBag.tax</label></td>
+                            </tr>
+                            <tr class="head-table">
+                                <td><h5>Status:</h5></td>
+                                <td><label style="font-weight:bold">@ViewBag.Status</label></td>
+                            </tr>
+    @*                        @foreach (FinalTotal final in (List<FinalTotal>)Session["final"])
+                            {
+                                <tr class="head-table">
+                                    <td><h5>Final Total Money:</h5></td>
+                                    <td><label style="font-weight:bold">@final.finalTotal VND</label></td>
+                                </tr>
+                            }*@
+                            <tr class="head-table">
+                                <td><h5>Final Total Money:</h5></td>
+                                <td><label style="font-weight:bold">@Session["finalTotal"] VND</label></td>
+                            </tr>
+                            <tr class="head-table">
+                                <td><h5>Payment Method:</h5></td>
+                                <td><label style="font-weight:bold">Cash</label></td>
+                            </tr>
+                            <tr>
+                                <td><a href="@Url.Action("index","cart")">Back to Cart...</a></td>
+                                <td><input class="bt_main" type="submit" value="Checkout" /></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </form>
+            }
+            else
+            {
+                <a href="@Url.Action("index","cart")">Back to Cart...</a>
+            }
+        </div>
+    </div>
+    <div class="col-md-4"></div>
+</div>

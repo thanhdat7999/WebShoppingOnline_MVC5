@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="viewport" content="initial-scale=1, maximum-scale=1">
     <!-- site metas -->
-    <title>It.Next - IT Service Responsive Html Theme</title>
+    <title>DatLuan Laptop We Serve The Best!</title>
     <meta name="keywords" content="">
     <meta name="description" content="">
     <meta name="author" content="">
@@ -53,7 +53,7 @@
                             <div class="topbar-left">
                                 <ul class="list-inline">
                                     <li> <span class="topbar-label"><i class="fa  fa-home"></i></span> <span class="topbar-hightlight">Huflit, District 10, Ho Chi Minh City</span> </li>
-                                    <li> <span class="topbar-label"><i class="fa fa-envelope-o"></i></span> <span class="topbar-hightlight"><a href="mailto:info@yourdomain.com">thanhdat7999@gmail.com</a> || <a href="mailto:info@yourdomain.com">truongphat1712@gmail.com</a></span> </li>
+                                    <li> <span class="topbar-label"><i class="fa fa-envelope-o"></i></span> <span class="topbar-hightlight"><a href="mailto:thanhdat7999@gmail.com">thanhdat7999@gmail.com</a> || <a href="mailto:congluantran01@gmail.com">congluantran01@gmail.com</a></span> </li>
                                 </ul>
                             </div>
                         </div>
@@ -81,7 +81,7 @@
                 <div class="row">
                     <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12">
                         <!-- logo start -->
-                        <div class="logo"> <a href="@Url.Action("Index","Home", new { area=""})"><img src="~/Templates/IT-Next/images/logos/it_logo.png" alt="logo" /></a> </div>
+                        <div class="logo"> <a href="@Url.Action("Index","Home", new { area=""})"><img src="~/Templates/IT-Next/images/logos/laptopLG.png" alt="logo" /></a> </div>
                         <!-- logo end -->
                     </div>
                     <div class="col-lg-9 col-md-12 col-sm-12 col-xs-12">
@@ -95,6 +95,10 @@
                                     <li><a href="@Url.Action("Menu","Home", new { area=""})">Menu</a></li>
                                     <li><a href="@Url.Action("HistoryOrder","OrderProgress", new { area=""})">Order</a></li>
                                     <li><a href="@Url.Action("Index","Cart", new { area=""})">Cart @ViewData["countCartProducts"]</a></li>
+                                    @if (User.Identity.IsAuthenticated)
+                                    {
+                                        <li><a href="@Url.Action("ChatRoom","Home", new { area=""})">Chat Room</a></li>
+                                    }
                                     @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
                                     {
                                         <li><a href="@Url.Action("Index","AdminHome", new { area="Admin"})">Admin Page</a></li>
@@ -152,7 +156,7 @@
                     <ul class="footer-menu">
                         <li class="fb"><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i> https://www.facebook.com/</a></li>
                         <li class="tw"><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i> https://twitter.com/ThanhDat7999</a></li>
-                        <li class="gp"><a href="#"><i class="fa fa-google-plus" aria-hidden="true"></i> thanhdat7999@gmail.com</a></li>
+                        <li class="gp"><a href="mailto:thanhdat7999@gmail.com"><i class="fa fa-google-plus" aria-hidden="true"></i> thanhdat7999@gmail.com</a></li>
                     </ul>
                 </div>
                 <div class="col-md-6">
@@ -160,9 +164,9 @@
                         <h2>Additional links</h2>
                     </div>
                     <ul class="footer-menu">
-                        <li><a href="it_about.html"><i class="fa fa-angle-right"></i> About us</a></li>
                         <li><a href="it_term_condition.html"><i class="fa fa-angle-right"></i> Chat Room</a></li>
-                        <li><a href="it_privacy_policy.html"><i class="fa fa-angle-right"></i> Home Page</a></li                    </ul>
+                        <li><a href="it_privacy_policy.html"><i class="fa fa-angle-right"></i> Home Page</a></li>
+                    </ul>
                 </div>
                 <div class="col-md-6">
                     <div class="main-heading left_text">
@@ -170,7 +174,6 @@
                     </div>
                     <ul class="footer-menu">
                         <li><a href="it_data_recovery.html"><i class="fa fa-angle-right"></i> Menu Products</a></li>
-                        <li><a href="it_computer_repair.html"><i class="fa fa-angle-right"></i> Contact to support</a></li>
                     </ul>
                 </div>
                 <div class="col-md-6">
@@ -182,16 +185,6 @@
                         District 10, Ho Chi Minh City<br>
                         <span style="font-size:18px;"><a href="tel:+0773075568">+0773075568</a></span>
                     </p>
-                    <div class="footer_mail-section">
-                        <form>
-                            <fieldset>
-                                <div class="field">
-                                    <input placeholder="Email" type="text">
-                                    <button class="button_custom"><i class="fa fa-envelope" aria-hidden="true"></i></button>
-                                </div>
-                            </fieldset>
-                        </form>
-                    </div>
                 </div>
             </div>
         </div>
@@ -219,10 +212,9 @@
     <script src="~/Templates/IT-Next/revolution/js/extensions/revolution.extension.slideanims.min.js"></script>
     <script src="~/Templates/IT-Next/revolution/js/extensions/revolution.extension.video.min.js"></script>
 
-
-    <script src="~/Scripts/jquery.signalR-2.2.2.min.js"></script>
-    <script src="~/signalr/hubs"></script>
     @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
+    
 </body>
 </html>

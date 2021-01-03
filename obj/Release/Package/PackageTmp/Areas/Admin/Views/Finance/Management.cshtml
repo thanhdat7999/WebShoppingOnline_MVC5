@@ -1,0 +1,116 @@
+﻿
+@{
+    ViewBag.Title = "Management";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- inner page banner -->
+<div id="inner_banner" class="section inner_banner_section">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="full">
+                    <div class="title-holder">
+                        <div class="title-holder-cell text-left">
+                            <h1 class="page-title">Companies List</h1>
+                            <ol class="breadcrumb">
+                                <li><a href="@Url.Action("Index","Home",new { area=""})">Home</a></li>
+                                <li class="active">Companies List</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end inner page banner -->
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="side_bar_blog col-lg-3">
+            <h4>OUR SERVICE</h4>
+            <div class="categary">
+                <ul>
+                    <li><a href="@Url.Action("Index","AdminHome",new { area= "Admin"})"><i class="fa fa-angle-right"></i> Home</a></li>
+                    <li><a href="@Url.Action("Management","Finance",new { area= "Admin"})"><i class="fa fa-angle-right"></i> Finance Management</a></li>
+                    <li><a href="@Url.Action("index","discount",new { area= "Admin"})"><i class="fa fa-angle-right"></i>Create Discount</a></li>
+                    <li><a href="@Url.Action("Index","Company",new { area= "Admin"})"><i class="fa fa-angle-right"></i> Companies</a></li>
+                    <li><a href="@Url.Action("Index","Brand",new { area= "Admin"})"><i class="fa fa-angle-right"></i> Brands</a></li>
+                    <li><a href="@Url.Action("Index","Product",new { area= "Admin"})"><i class="fa fa-angle-right"></i> Products</a></li>
+                    <li><a href="@Url.Action("Index","User",new { area= "Admin"})"><i class="fa fa-angle-right"></i> Users</a></li>
+                    <li><a href="@Url.Action("Index","Order",new { area= "Admin"})"><i class="fa fa-angle-right"></i> Orders</a></li>
+                    <li><a href="@Url.Action("ordersAccept","Order",new { area= "Admin"})"><i class="fa fa-angle-right"></i> Orders Accepted</a></li>
+                    <li><a href="@Url.Action("ordersWaiting","Order",new { area= "Admin"})"><i class="fa fa-angle-right"></i> Orders Waiting</a></li>
+                    <li><a href="@Url.Action("ordersTrans","Order",new { area= "Admin"})"><i class="fa fa-angle-right"></i> Orders Transported</a></li>
+                    <li><a href="@Url.Action("ordersFinish","Order",new { area= "Admin"})"><i class="fa fa-angle-right"></i> Orders Finish</a></li>
+                    <li><a href="@Url.Action("ordersCancel","Order",new { area= "Admin"})"><i class="fa fa-angle-right"></i> Orders Cancel</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="col-lg-9 float-left" style="margin-top:30px">
+            <form action="@Url.Action("Management","Finance")">
+                <label>Day</label>
+                <select name="Day">
+                    @foreach (var day in ViewBag.day)
+                    {
+                        <option value="@day">@day</option>
+                    }
+                </select>
+                <label>Month</label>
+                <select name="Month">
+                    @foreach (var month in ViewBag.month)
+                    {
+                        <option value="@month">@month</option>
+                    }
+                </select>
+                <label>Year</label>
+                <select name="Year">
+                    @foreach (var year in ViewBag.year)
+                    {
+                        <option value="@year">@year</option>
+                    }
+                </select>
+                <input type="submit" value="Search" />
+            </form>
+
+            <div class="section padding_layout_1 Shopping_cart_section">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-9 col-md-9">
+                            @if (ViewBag.check == 0)
+                            {
+                                <h1 style="text-align:center">@ViewBag.error</h1>
+                            }
+                            else
+                            {
+                                <h2>Total in the day: @ViewData["orderDetail"]</h2>
+                                <table class="table">
+                                    <tr>
+                                        <td>Order ID</td>
+                                        <td>Date Time</td>
+                                        <td>Customer Email</td>
+                                        <td>Customer Address</td>
+                                    </tr>
+
+                                    @foreach (var item in ViewData["order"] as IEnumerable<TMDT_Web.Models.Domain.Order>)
+                                    {
+                                        <tr>
+                                            <td class="col-sm-1 col-md-1"><p class="price_table">@item.OrderID</p></td>
+                                            <td class="col-sm-1 col-md-1"><p class="price_table">@item.DateTimeOrder</p></td>
+                                            <td class="col-sm-1 col-md-1"><p class="price_table">@item.Account.Email</p></td>
+                                            <td class="col-sm-1 col-md-1"><p class="price_table">@item.Address</p></td>
+                                            <td class="col-sm-1 col-md-1"><a href="@Url.Action("DetailManagement", "Finance", new { area = "Admin", id=item.OrderID })"><p class="price_table">Detail</p></a></td>
+                                        </tr>
+                                    }
+                                </table>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+

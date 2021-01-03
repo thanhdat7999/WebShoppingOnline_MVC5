@@ -8,9 +8,9 @@ namespace TMDT_Web.signalr.hubs
 {
     public class ChatHub : Hub
     {
-        public void send(string id, string name, string message)
+        public void send(string name,string avatar, string message)
         {
-            Clients.All.addNewMessageToPage(id, name, message);
+            Clients.All.addNewMessageToPage(name,avatar, message);
         }
     }
 }

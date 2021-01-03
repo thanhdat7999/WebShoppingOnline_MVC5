@@ -12,7 +12,7 @@ namespace TMDT_Web.Data
         public DataContext():base("DataContext")
         { 
         }
-
+        //Data Source = DESKTOP - P9AIUNQ\THANHDAT;Initial Catalog = TMDT_Web; Integrated Security = True
         public DbSet<Product> product { get; set; }
         public DbSet<Brand> brand { get; set; }
         public DbSet<Company> company { get; set; }
@@ -21,5 +21,6 @@ namespace TMDT_Web.Data
         public DbSet<Account> account { get; set; }
         public DbSet<Role> role { get; set; }
         public DbSet<Review> review { get; set; }
+        public DbSet<Discount> discounts { get; set; }
     }
 }

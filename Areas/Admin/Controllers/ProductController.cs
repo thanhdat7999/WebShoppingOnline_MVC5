@@ -17,14 +17,81 @@ namespace TMDT_Web.Areas.Admin.Controllers
         //Database
         DataContext db = new DataContext();
 
-        public ActionResult Index(int? page)
+        //Hiển thị danh sách sản phẩm
+        public ActionResult Index(int? page, string error)
         {
+            ViewBag.error = error;
             //Page list
             int pageSize = 15;
             int pageNumber = (page ?? 1);
             return View(db.product.ToList().ToPagedList(pageNumber, pageSize));
         }
+        public ActionResult SortName()
+        {
+            return RedirectToAction("Index", "Product");
+        }
+        public ActionResult Search(string opt, string search, int? page)
+        {
+            //Page list
+            int pageSize = 15;
+            int pageNumber = (page ?? 1);
 
+            if (opt == "ProductName")
+            {
+                var proList = db.product.ToList();
+                foreach(var check in proList)
+                {
+                    if (check.ProductName == search)
+                    {
+                        var proName = db.product.Where(x => x.ProductName == search).ToList();
+                        ViewBag.opt = opt;
+                        ViewBag.search = search;
+                        return View(proName.ToPagedList(pageNumber, pageSize));
+                    }
+                    else
+                    {
+                        return RedirectToAction("Index", "Product",new {error= "Can not find product name!" });
+                    }
+                }
+            }
+            else if(opt == "Company")
+            {
+                var proList = db.product.ToList();
+                foreach (var check in proList)
+                {
+                    if (check.Brand.Company.CompanyName == search)
+                    {
+                        var comName = db.product.Where(x => x.Brand.Company.CompanyName == search).ToList();
+                        ViewBag.opt = opt;
+                        ViewBag.search = search;
+                        return View(comName.ToPagedList(pageNumber, pageSize));
+                    }
+                    else
+                    {
+                        return RedirectToAction("Index", "Product", new { error = "Can not find company name!" });
+                    }
+                }             
+            }
+            else
+            {
+                var proList = db.product.ToList();
+                foreach (var check in proList)
+                {
+                    if (check.Brand.BrandName == search)
+                    {
+                        var brandName = db.product.Where(x => x.Brand.BrandName == search).ToList();
+                        ViewBag.opt = opt;
+                        ViewBag.search = search;
+                        return View(brandName.ToPagedList(pageNumber, pageSize));
+                    }
+                    else
+                    {
+                        return RedirectToAction("Index", "Product", new { error = "Can not find brand!" });
+                    }
+                }
+            }
+            return View();
+        }
         //----------------Thêm cty----------------
         public ActionResult Create()
         {
